@@ -26,9 +26,13 @@ class Pegawai extends CI_Controller {
 	}
 
 	public function list_pegawai(){
+		$this->load->model('model_pegawai');
 		
-		$var['content'] = 'view-dashboard';
+		$var['content'] = 'view-pegawai';
+		$var['js'] = 'js-pegawai';
 
-		$this->load->view('view-pegawai',$var);
+		$var['ls_pegawai'] = $this->model_pegawai->getListPegawai();
+
+		$this->load->view('view-index',$var);
 	}
 }

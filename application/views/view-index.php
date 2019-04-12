@@ -15,6 +15,7 @@
 
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
     <link href="<?php echo base_url(); ?>assets/plugins/node-waves/waves.css" rel="stylesheet" />
@@ -462,7 +463,9 @@
     </section>
 
     <section class="content">
-        <?php $this->load->view($content); ?>
+    	<div class="container-fluid">
+        	<?php $this->load->view($content); ?>
+    	</div>
     </section>
 
     <!-- Jquery Core Js -->
@@ -472,7 +475,11 @@
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Select Plugin Js -->
-    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+    <!-- Datatable -->
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
     <!-- Slimscroll Plugin Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -506,6 +513,7 @@
 
     <!-- Demo Js -->
     <script src="<?php echo base_url(); ?>assets/ext/js/demo.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/<?php echo $js; ?>.js"></script>
 </body>
 
 </html>
