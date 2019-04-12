@@ -5,7 +5,7 @@
     </a>
 </li>
 <li>
-    <a href="index.html">
+    <a href="<?php echo base_url('pegawai/list_pegawai'); ?>">
         <i class="material-icons">people</i>
         <span>Pegawai</span>
     </a>
