@@ -36,11 +36,11 @@
                                 <td>1</td>
                                 <td><?php echo $value->nama_singkat; ?></td>
                                 <td><?php echo $value->nama_fungsional; ?></td>
-                                <td>jagsd</td>
-                                <td>jhagsdgwd</td>
-                                <td>jaghsdasd</td>
-                                <td>jagsd</td>
-                                <td>jhagsdgwd</td>
+                                <td><?php echo $value->nama_jabatan; ?></td>
+                                <td><?php echo $value->nama_department; ?></td>
+                                <td><?php echo $value->nama_status; ?></td>
+                                <td><?php echo $value->no_telepon; ?></td>
+                                <td><?php echo $value->nama_atasan; ?></td>
                                 <td>
                                     <button class="btn bg-blue waves-effect btn-xs">
                                         <i class="material-icons">search</i>
