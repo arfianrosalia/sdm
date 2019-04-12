@@ -27,19 +27,30 @@
                             <th>Status</th>
                             <th>No&nbsp;Telp</th>
                             <th>Atasan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>jhagsdgwd</td>
-                            <td>jaghsdasd</td>
-                            <td>jagsd</td>
-                            <td>jhagsdgwd</td>
-                            <td>jaghsdasd</td>
-                            <td>jagsd</td>
-                            <td>jhagsdgwd</td>
-                        </tr>
+                        <?php foreach ($ls_pegawai as $key => $value) { ?>
+                            <tr>
+                                <td>1</td>
+                                <td><?php echo $value->nama_singkat; ?></td>
+                                <td><?php echo $value->nama_fungsional; ?></td>
+                                <td>jagsd</td>
+                                <td>jhagsdgwd</td>
+                                <td>jaghsdasd</td>
+                                <td>jagsd</td>
+                                <td>jhagsdgwd</td>
+                                <td>
+                                    <button class="btn bg-blue waves-effect btn-xs">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                    <button class="btn bg-orange waves-effect btn-xs">
+                                        <i class="material-icons">create</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
