@@ -74,5 +74,39 @@ class Home extends CI_Controller {
 			$this->db->where('id',$value->PegawaiID)->update('personalia_pegawai',array('fungsional'=>$id_fungsional));
 		}
 	}
+
+	public function gen_department(){
+		function d($x){
+			if($x==1){
+				return date('Y-m-d H:i:s');
+			}
+		}
+		$in = $this->db->get('tmdepartemen')->result();
+
+		foreach ($in as $key => $value) {
+			$this->db->insert('master_department',array(
+				'id'=>$value->departemenID,
+				'nama_department'=>$value->departemen,
+				'keterangan'=>$value->keterangan,
+				'delete_date'=>d($value->dihapus),
+				'is_delete'=>$value->dihapus
+			));
+		}
+
+		echo "SUKSES";
+	}
+
+	public function gen_jabatan(){
+		$in = $this->db->get('tmjabatan')->result();
+		foreach ($in as $key => $value) {
+			$this->db->insert('master_jabatan',array(
+				'id'=>$value->jabatanID,
+				'nama_jabatan'=>$value->jabatan,
+				'keterangan'=>$value->keterangan
+			));
+		}
+
+		echo "SUKSES";
+	}
 }
 

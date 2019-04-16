@@ -35,4 +35,15 @@ class Pegawai extends CI_Controller {
 
 		$this->load->view('view-index',$var);
 	}
+
+	public function pegawaiByID(){
+		$this->load->model('model_pegawai');	
+		$var['ls_pegawai'] = $this->model_pegawai->getListPegawaiByID($this->input->post('token'));
+
+		if(!empty($var['ls_pegawai'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_pegawai']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
 }

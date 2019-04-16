@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+<script type="text/javascript">
+	var URL = "<?php echo base_url(); ?>";
+</script>
 <html>
 
 <head>
@@ -25,6 +28,9 @@
 
     <!-- Morris Chart Css-->
     <link href="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/plugins/select2/select2.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>assets/ext/css/style.css" rel="stylesheet">
@@ -498,14 +504,20 @@
     <script src="<?php echo base_url(); ?>assets/plugins/chartjs/Chart.bundle.js"></script>
 
     <!-- Flot Charts Plugin Js -->
+    <?php if(1+1==0){ ?>
     <script src="<?php echo base_url(); ?>assets/plugins/flot-charts/jquery.flot.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/flot-charts/jquery.flot.resize.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/flot-charts/jquery.flot.pie.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/flot-charts/jquery.flot.categories.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/flot-charts/jquery.flot.time.js"></script>
+    <?php } ?>
 
     <!-- Sparkline Chart Plugin Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/momentjs/moment.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.js"></script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url(); ?>assets/ext/js/admin.js"></script>

@@ -2,7 +2,7 @@
     <h2>LIST PEGAWAI</h2>
 </div>
 
-<div class="row clearfix">
+<div class="row clearfix" id="list_pegawai" style="display: none;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="header">
@@ -16,40 +16,52 @@
                 </div>
             </div>
             <div class="body">
+
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12">
+                        <a href="#add_person">
+                            <button class="btn waves-effect bg-green" onclick="formAdd()">
+                                <i class="material-icons">person_add</i>&nbsp;Tambah Karyawan
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 <table class="table table-bordered table-responsive table-hover" id="tb_Pegawai">
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>NIK</th>
+                            
                             <th>Nama</th>
-                            <th>Fungsional</th>
-                            <th>Jabatan</th>
-                            <th>Department</th>
+                            <th>Department&nbsp;&&nbsp;Jabatan</th>
+                            <th>Wilayah&nbsp;Agen</th>
                             <th>Status</th>
-                            <th>No&nbsp;Telp</th>
-                            <th>Atasan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($ls_pegawai as $key => $value) { ?>
-                            <tr>
-                                <td>1</td>
-                                <td><?php echo $value->nama_singkat; ?></td>
-                                <td><?php echo $value->nama_fungsional; ?></td>
-                                <td><?php echo $value->nama_jabatan; ?></td>
-                                <td><?php echo $value->nama_department; ?></td>
-                                <td><?php echo $value->nama_status; ?></td>
-                                <td><?php echo $value->no_telepon; ?></td>
-                                <td><?php echo $value->nama_atasan; ?></td>
-                                <td>
-                                    <button class="btn bg-blue waves-effect btn-xs">
-                                        <i class="material-icons">search</i>
-                                    </button>
-                                    <button class="btn bg-orange waves-effect btn-xs">
-                                        <i class="material-icons">create</i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <?php if(!empty($ls_pegawai)){ $no=1; ?>
+                            <?php foreach ($ls_pegawai as $key => $value) { ?>
+                                <tr>
+                                    <td><?php echo $no; ?></td>
+                                    <td><b><?php echo $value->nik; ?></b></td>
+                                    
+                                    <td width="200px"><?php echo $value->nama_lengkap; ?></td>
+                                    <td width="250px">
+                                        <?php echo $value->nama_department; ?><br>
+                                        <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
+                                    </td>
+                                    <td><?php echo $value->nama_agen; ?></td>
+                                    <td width="150px"><?php echo $value->nama_status; ?></td>
+                                    <td width="100px">
+                                        <a href="#detail">
+                                            <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
+                                                <i class="material-icons">create</i>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php $no++; } ?>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -57,3 +69,654 @@
         </div>
     </div>
 </div>
+
+<div class="row clearfix" id="form_pegawai" style="display: none;">
+    <div class="col-xs-12 col-sm-3">
+        <div class="card profile-card">
+            <div class="profile-header">&nbsp;</div>
+            <div class="profile-body">
+                <div class="image-area">
+                    <img src="<?php echo base_url(); ?>assets/images/user.jpg" alt="AdminBSB - Profile Image" />
+                </div>
+                <div class="content-area">
+                    <h3>Moch. Arfian A</h3>
+                    <p>Web Software Developer</p>
+                    <p>IT Programmer</p>
+                </div>
+            </div>
+            <div class="profile-footer">
+                <ul>
+                    <li>
+                        <span>Followers</span>
+                        <span>1.234</span>
+                    </li>
+                    <li>
+                        <span>Following</span>
+                        <span>1.201</span>
+                    </li>
+                    <li>
+                        <span>Friends</span>
+                        <span>14.252</span>
+                    </li>
+                </ul>
+                <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>
+            </div>
+        </div>
+
+        <div class="card card-about-me">
+            <div class="header">
+                <h2>ABOUT ME</h2>
+            </div>
+            <div class="body">
+                <ul>
+                    <li>
+                        <div class="title">
+                            <i class="material-icons">library_books</i>
+                            Education
+                        </div>
+                        <div class="content">
+                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                        </div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <i class="material-icons">location_on</i>
+                            Location
+                        </div>
+                        <div class="content">
+                            Malibu, California
+                        </div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <i class="material-icons">edit</i>
+                            Skills
+                        </div>
+                        <div class="content">
+                            <span class="label bg-red">UI Design</span>
+                            <span class="label bg-teal">JavaScript</span>
+                            <span class="label bg-blue">PHP</span>
+                            <span class="label bg-amber">Node.js</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <i class="material-icons">notes</i>
+                            Description
+                        </div>
+                        <div class="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id="form_detail">
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Data Pribadi</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="nik">
+                                    <label class="form-label">NIK (Karyawan)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="no_ktp">
+                                    <label class="form-label">No KTP</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="nama_singkat">
+                                    <label class="form-label">Nama Panggilan</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Gelar</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="gelar">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Tanggal Lahir</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tanggal_lahir">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="nama_lengkap">
+                                    <label class="form-label">Nama Lengkap</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <select class="form-control" name="jenis_kelamin">
+                                        <option disabled="disabled" selected="selected">-- Pilih Jenis Kelamin --</option>
+                                        <option>Jenis Kelamin</option>
+                                        <option>Ketchup</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Pendidikan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="pendidikan">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Agama</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="agama">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Fungsional</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="fungsional">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">TMT</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tmt">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Department</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="department">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="email_address">Jabatan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="jabatan">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <input type="text" class="form-control" name="no_telepon">
+                                    <label class="form-label">No Telepon</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <input type="text" class="form-control" name="kode_pos">
+                                    <label class="form-label">Kode Pos</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Keluarga</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <input type="text" class="form-control" name="nama_pasangan">
+                                    <label class="form-label">Nama Suami / Istri</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <input type="text" class="form-control" name="jumlah_anak">
+                                    <label class="form-label">Jumlah Anak</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Kota Kelahiran</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Provinsi</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kabupaten / Kota</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kecamatan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Desa / Kelurahan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="kota_kelahiran">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="email_address">Alamat Lengkap</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <textarea class="form-control" name="alamat"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Status</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Status Karyawan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="status_karyawan">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Status Pribadi</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="status_pribadi">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Status Keaktifan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Nama Atasan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="atasan">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Lokasi Agen</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Provinsi</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kabupaten / Kota</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kecamatan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Desa / Kelurahan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="lokasi_agen">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="header">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>Alamat Karyawan</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Provinsi</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kabupaten / Kota</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Kecamatan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label for="email_address">Desa / Kelurahan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" name="wilayah">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="email_address">Alamat Lengkap</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="email_address">Catatan</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <textarea class="form-control" name="catatan"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NIK, NAMA, DEPART, JBT, WILAYAH, STATUS,  -->
+
+<style type="text/css">
+    table#tb_Pegawai thead tr th{
+        font-size: 10pt;
+    }
+
+    table#tb_Pegawai tbody tr td{
+        font-size: 10pt;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+</style>
