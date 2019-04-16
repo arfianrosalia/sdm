@@ -41,7 +41,9 @@
 						master_status_karyawan.id as status_karyawan,
 						master_status_pribadi.id as status_pribadi,
 						p.no_telepon,
-						master_agen.id as nama_agen
+						master_agen.id as nama_agen,
+						wilayah_regencies.province_id as provinsi_kelahiran,
+						wilayah_regencies.id as kabupaten_kelahiran
 					';
 			$load = $this->db
 					->select($val)
@@ -55,6 +57,7 @@
 					->join('master_status_pribadi','master_status_pribadi.id=p.status_pribadi','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
 					->join('master_agen','master_agen.id=p.lokasi_agen','left')
+					->join('wilayah_regencies','wilayah_regencies.id=p.kota_kelahiran','left')
 					->where('p.id_token',$id)
 					->get();
 
@@ -96,7 +99,11 @@
 		}
 
 		public function getKabupaten($prov=null){
-			$select = $this->db->get_where('wilayah_regencies',array('province_id'=>$prov));
+			if(!empty($prov)){
+				$select = $this->db->get_where('wilayah_regencies',array('province_id'=>$prov));
+			}else{
+				$select = $this->db->get('wilayah_regencies');
+			}
 
 			if($select->num_rows()>0){
 				return $select->result();
@@ -106,7 +113,11 @@
 		}
 
 		public function getKecamatan($kab=null){
-			$select = $this->db->get_where('wilayah_districts',array('regency_id'=>$kab));
+			if(!empty($prov)){
+				$select = $this->db->get_where('wilayah_districts',array('regency_id'=>$kab));
+			}else{
+				$select = $this->db->get('wilayah_districts');
+			}
 
 			if($select->num_rows()>0){
 				return $select->result();
@@ -116,10 +127,24 @@
 		}
 
 		public function getKelurahan($kec=null){
-			$select = $this->db->get_where('wilayah_villages',array('district_id'=>$kec));
+			if(!empty($prov)){
+				$select = $this->db->get_where('wilayah_villages',array('district_id'=>$kec));
+			}else{
+				$select = $this->db->get('wilayah_villages');	
+			}
 
 			if($select->num_rows()>0){
 				return $select->result();
+			}else{
+				return null;
+			}
+		}
+
+		public function getKotaKelahiran($x=null){
+			$select = $this->db->get_where('wilayah_regencies',array('id'=>$x));
+
+			if($select->num_rows()>0){
+				return $select->row();
 			}else{
 				return null;
 			}

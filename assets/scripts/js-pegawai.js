@@ -22,7 +22,7 @@ function detail(x=null){
 		state="EDIT";
 		$.post(URL+'pegawai/pegawaiByID',{token:x}).done(function(data){
 			try{
-				$('#form_pegawai').fadeIn('fast');
+				$('#form_pegawai').fadeIn('slow');
 				var res = JSON.parse(data);
 
 				if(res.status==1){
@@ -33,6 +33,20 @@ function detail(x=null){
 							$('#form_detail input[name="'+key+'"]').parent().addClass('focused');
 						}
 					});
+
+					ch_prov_kota_kelahiran(res.result.provinsi_kelahiran,res.result.kabupaten_kelahiran);
+
+					// $.post(URL+'pegawai/getKotaBy',{x:res.result.provinsi_kelahiran}).done(function(dt){
+					// 	var r = JSON.parse(dt);
+
+					// 	r.result.forEach(function(item,i){
+					// 		$("select[name='kt_kelahiran']").append(new Option(item.name, item.id));
+					// 	});
+
+					// 	$("select[name='kt_kelahiran']").val(res.result.kabupaten_kelahiran);
+					// }).fail(function(e){
+
+					// });
 				}
 
 
@@ -54,3 +68,19 @@ $(window).on('popstate', function(event) {
 		});
 	}
 });
+
+function ch_prov_kota_kelahiran(id_prov=null,id_kota=null){
+	$.post(URL+'pegawai/getKotaBy',{x:id_prov}).done(function(dt){
+		var r = JSON.parse(dt);
+		$("select[name='kt_kelahiran']").empty();
+		r.result.forEach(function(item,i){
+			$("select[name='kt_kelahiran']").append(new Option(item.name, item.id));
+		});
+
+		if(id_kota!=null){
+			$("select[name='kt_kelahiran']").val(id_kota);
+		}
+	}).fail(function(e){
+
+	});
+}

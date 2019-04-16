@@ -43,7 +43,13 @@ class Pegawai extends CI_Controller {
 		$var['ls_status_pribadi'] = $this->model_pegawai->getMaster('status_pribadi');
 		$var['ls_atasan'] = $this->model_pegawai->getAtasan();
 
+
 		$var['ls_provinsi'] = $this->model_pegawai->getProvinsi();
+		// $var['ls_kota'] = $this->model_pegawai->getKabupaten();
+		// $var['ls_kecamatan'] = $this->model_pegawai->getKecamatan();
+		// $var['ls_kelurahan'] = $this->model_pegawai->getKelurahan();
+
+
 
 
 		$this->load->view('view-index',$var);
@@ -53,8 +59,69 @@ class Pegawai extends CI_Controller {
 		$this->load->model('model_pegawai');	
 		$var['ls_pegawai'] = $this->model_pegawai->getListPegawaiByID($this->input->post('token'));
 
+		$kota_kelahiran = $this->model_pegawai->getKotaKelahiran($var['ls_pegawai']->kota_kelahiran);
+
+
+
 		if(!empty($var['ls_pegawai'])){
 			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_pegawai']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getProvinsi(){
+		$this->load->model('model_pegawai');	
+		$var['ls_provinsi'] = $this->model_pegawai->getProvinsi();
+
+		if(!empty($var['ls_provinsi'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_provinsi']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getKabupaten(){
+		$this->load->model('model_pegawai');	
+		$var['ls_kabupaten'] = $this->model_pegawai->getKabupaten();
+
+		if(!empty($var['ls_kabupaten'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kabupaten']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getKecamatan(){
+		$this->load->model('model_pegawai');	
+		$var['ls_kecamatan'] = $this->model_pegawai->getKecamatan();
+
+		if(!empty($var['ls_kecamatan'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kecamatan']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getKelurahan(){
+		$this->load->model('model_pegawai');	
+		$var['ls_kelurahan'] = $this->model_pegawai->getKelurahan();
+
+		if(!empty($var['ls_kelurahan'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kelurahan']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getKotaBy(){
+		$this->load->model('model_pegawai');	
+		
+		$id = $this->input->post('x');
+		$var['ls_kota'] = $this->model_pegawai->getKabupaten($id);
+
+		if(!empty($var['ls_kota'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kota']));
 		}else{
 			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
 		}

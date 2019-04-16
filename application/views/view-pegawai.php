@@ -416,11 +416,11 @@
                 <label style="color: green;">Kota Kelahiran</label>
                 <form>
                     <div class="row clearfix">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="email_address">Provinsi</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select">
+                                    <select class="form-control show-tick design-select" name="provinsi_kelahiran" onchange="ch_prov_kota_kelahiran($(this).val())">
                                         <option disabled="disabled" selected="selected">-- Pilih Provinsi --</option>
                                         <?php if(!empty($ls_provinsi)){ ?>
                                             <?php foreach ($ls_provinsi as $key => $value) { ?>
@@ -432,40 +432,12 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="email_address">Kabupaten / Kota</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Kecamatan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Desa / Kelurahan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="kota_kelahiran">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select class="form-control show-tick design-select" name="kt_kelahiran">
+                                        
                                     </select>
                                 </div>
                             </div>
