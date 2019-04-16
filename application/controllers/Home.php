@@ -108,5 +108,16 @@ class Home extends CI_Controller {
 
 		echo "SUKSES";
 	}
+
+	public function gen_kota(){
+		$in = $this->db->get('tmp_kota')->result();
+		foreach ($in as $key => $value) {
+			$this->db->where('id',$value->id)->update('personalia_pegawai',array(
+				'kota_kelahiran'=>$value->kota
+			));
+		}
+
+		echo "SUKSES";
+	}
 }
 

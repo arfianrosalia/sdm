@@ -201,10 +201,13 @@
                             <label for="email_address">Gelar</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="gelar">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select class="form-control show-tick" name="gelar">
+                                        <option disabled="disabled" selected="selected">-- Pilih Gelar --</option>
+                                        <?php if(!empty($ls_gelar)){ ?>
+                                            <?php foreach ($ls_gelar as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_gelar; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -235,8 +238,8 @@
                                 <div class="form-line">
                                     <select class="form-control" name="jenis_kelamin">
                                         <option disabled="disabled" selected="selected">-- Pilih Jenis Kelamin --</option>
-                                        <option>Jenis Kelamin</option>
-                                        <option>Ketchup</option>
+                                        <option value="L">Laki Laki</option>
+                                        <option value="P">Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -248,10 +251,13 @@
                             <label for="email_address">Pendidikan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="pendidikan">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select class="form-control show-tick" name="pendidikan">
+                                        <option disabled="disabled" selected="selected">-- Pilih Pendidikan --</option>
+                                        <?php if(!empty($ls_pendidikan)){ ?>
+                                            <?php foreach ($ls_pendidikan as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_pendidikan; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -261,10 +267,13 @@
                             <label for="email_address">Agama</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="agama">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select class="form-control show-tick" name="agama">
+                                        <option disabled="disabled" selected="selected">-- Pilih Agama --</option>
+                                        <?php if(!empty($ls_agama)){ ?>
+                                            <?php foreach ($ls_agama as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_agama; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -278,9 +287,12 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="fungsional">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Fungsional --</option>
+                                        <?php if(!empty($ls_fungsional)){ ?>
+                                            <?php foreach ($ls_fungsional as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_fungsional; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -302,9 +314,12 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="department">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Department --</option>
+                                        <?php if(!empty($ls_department)){ ?>
+                                            <?php foreach ($ls_department as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_department; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -315,9 +330,12 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="jabatan">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Jabatan --</option>
+                                        <?php if(!empty($ls_jabatan)){ ?>
+                                            <?php foreach ($ls_jabatan as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_jabatan; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -387,7 +405,7 @@
             <div class="header">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
-                        <h2>Kota Kelahiran</h2>
+                        <h2>Alamat</h2>
                     </div>
                     <div class="col-xs-12 col-sm-6 align-right">
                         <div class="waves-effect"><i class="material-icons">refresh</i></div>
@@ -395,6 +413,7 @@
                 </div>
             </div>
             <div class="body">
+                <label style="color: green;">Kota Kelahiran</label>
                 <form>
                     <div class="row clearfix">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -402,9 +421,12 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Provinsi --</option>
+                                        <?php if(!empty($ls_provinsi)){ ?>
+                                            <?php foreach ($ls_provinsi as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -449,7 +471,10 @@
                             </div>
                         </div>
                     </div>
-
+                </form>
+                <hr>
+                <label style="color: green;">Domisili</label>
+                <form>
                     <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label for="email_address">Alamat Lengkap</label>
@@ -483,9 +508,12 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="status_karyawan">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Status Karyawan --</option>
+                                        <?php if(!empty($ls_status_karyawan)){ ?>
+                                            <?php foreach ($ls_status_karyawan as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_karyawan; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -496,42 +524,34 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="status_pribadi">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Status Pribadi --</option>
+                                        <?php if(!empty($ls_status_pribadi)){ ?>
+                                            <?php foreach ($ls_status_pribadi as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_pribadi; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label for="email_address">Status Keaktifan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row clearfix">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label for="email_address">Nama Atasan</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick design-select" name="atasan">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                        <option disabled="disabled" selected="selected">-- Pilih Atasan --</option>
+                                        <?php if(!empty($ls_atasan)){ ?>
+                                            <?php foreach ($ls_atasan as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_lengkap; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -551,134 +571,17 @@
                 <form>
                     <div class="row clearfix">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Provinsi</label>
+                            <label for="email_address">Lokasi</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select class="form-control show-tick design-select" name="nama_agen">
+                                        <option disabled="disabled" selected="selected">-- Pilih Lokasi --</option>
+                                        <?php if(!empty($ls_lokasi_agen)){ ?>
+                                            <?php foreach ($ls_lokasi_agen as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_agen; ?></option>
+                                            <? } ?>
+                                        <?php } ?>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Kabupaten / Kota</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Kecamatan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Desa / Kelurahan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="lokasi_agen">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="header">
-                <div class="row clearfix">
-                    <div class="col-xs-12 col-sm-6">
-                        <h2>Alamat Karyawan</h2>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 align-right">
-                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="body">
-                <form>
-                    <div class="row clearfix">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Provinsi</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Kabupaten / Kota</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Kecamatan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label for="email_address">Desa / Kelurahan</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="wilayah">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <label for="email_address">Alamat Lengkap</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <textarea class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
