@@ -126,4 +126,32 @@ class Pegawai extends CI_Controller {
 			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
 		}
 	}
+
+	public function genNIK(){
+		$getMax = $this->db
+					->select("MAX(CAST(nik AS UNSIGNED)) as LASTNIK")
+					->get('personalia_pegawai')
+					->row()->LASTNIK;
+
+		if(!empty($getMax)){
+			echo json_encode(array('status'=>1,'message'=>'Generated Success','result'=>((int)$getMax+1)));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Error Generated','result'=>null));
+		}
+	}
+
+	public function insertPegawai(){
+		$data = $this->input->post('data');
+
+		$fix = (Object)array();
+		foreach ($data as $key => $value) {
+			$k_fix = str_replace("c_","",$key);
+			$fix->$k_fix = $value;
+		}
+
+		$fix->id_token = md5(sha1($data['c_nik']));
+
+		
+		$this->db->insert('personalia_pegawai',$fix);
+	}
 }

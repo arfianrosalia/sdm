@@ -10,12 +10,12 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Welcome To | SDM&nbsp;&&nbsp; UMUM</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
+    <link href="<?php echo base_url('assets'); ?>/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -30,10 +30,13 @@
     <link href="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <link href="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/plugins/crop/croppie.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>assets/ext/css/style.css" rel="stylesheet">
+
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>assets/ext/css/themes/all-themes.css" rel="stylesheet" />
@@ -475,7 +478,9 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.js"></script>
+    <script src="<?php echo base_url('assets'); ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
 
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.js"></script>
@@ -515,8 +520,10 @@
     <!-- Sparkline Chart Plugin Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-sparkline/jquery.sparkline.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/momentjs/moment.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/crop/croppie.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.js"></script>
 
     <!-- Custom Js -->

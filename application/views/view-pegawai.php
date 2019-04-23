@@ -1,3 +1,5 @@
+
+
 <div class="block-header">
     <h2>LIST PEGAWAI</h2>
 </div>
@@ -26,6 +28,10 @@
                         </a>
                     </div>
                 </div>
+<!-- or even simpler -->
+
+
+
                 <table class="table table-bordered table-responsive table-hover" id="tb_Pegawai">
                     <thead>
                         <tr>
@@ -71,12 +77,15 @@
 </div>
 
 <div class="row clearfix" id="form_pegawai" style="display: none;">
-    <div class="col-xs-12 col-sm-3">
-        <div class="card profile-card">
+    <div class="col-xs-12 col-sm-3" id="profil_card">
+        <div class="card profile-card" >
             <div class="profile-header">&nbsp;</div>
             <div class="profile-body">
                 <div class="image-area">
-                    <img src="<?php echo base_url(); ?>assets/images/user.jpg" alt="AdminBSB - Profile Image" />
+                    <a href="javascript:void(0)" onclick="document.getElementById('ft').click();">
+                        <img id="foto_profile" width="75%" height="75%" src="<?php echo base_url(); ?>assets/images/user.png" alt="AdminBSB - Profile Image"/>
+                        <input id="ft" type="file" accept="image/*" style="display: none;" onchange="ch_img_profile(this)">
+                    </a>
                 </div>
                 <div class="content-area">
                     <h3>Moch. Arfian A</h3>
@@ -99,11 +108,11 @@
                         <span>14.252</span>
                     </li>
                 </ul>
-                <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>
+                <button class="btn btn-primary btn-lg waves-effect btn-block ">FOLLOW</button>
             </div>
         </div>
 
-        <div class="card card-about-me">
+        <!-- <div class="card card-about-me">
             <div class="header">
                 <h2>ABOUT ME</h2>
             </div>
@@ -150,10 +159,17 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id="form_detail">
+        <div class="card" id="panel-foto" style="display: none;">
+            <div class="body">
+                <div src="" id="upload-demo"></div>
+                <center><button class="btn btn-primary waves-effect upload-result">CROP IMAGE</button></center>
+            </div>
+        </div>
+
         <div class="card">
             <div class="header">
                 <div class="row clearfix">
@@ -166,12 +182,13 @@
                 </div>
             </div>
             <div class="body">
+                
                 <form>
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="nik">
+                                    <input type="text" class="form-control" col="c_nik" name="nik" disabled="disabled">
                                     <label class="form-label">NIK (Karyawan)</label>
                                 </div>
                             </div>
@@ -180,7 +197,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="no_ktp">
+                                    <input type="text" class="form-control" col="c_no_ktp" name="no_ktp">
                                     <label class="form-label">No KTP</label>
                                 </div>
                             </div>
@@ -189,8 +206,8 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="nama_singkat">
-                                    <label class="form-label">Nama Panggilan</label>
+                                    <input type="text" class="form-control" col="c_nama_singkat" name="nama_singkat">
+                                    <label class="form-label">Nama Panggilan *</label>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +218,7 @@
                             <label for="email_address">Gelar</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" name="gelar">
+                                    <select class="form-control show-tick" col="c_gelar" name="gelar">
                                         <option disabled="disabled" selected="selected">-- Pilih Gelar --</option>
                                         <?php if(!empty($ls_gelar)){ ?>
                                             <?php foreach ($ls_gelar as $key => $value) { ?>
@@ -217,7 +234,8 @@
                             <label for="email_address">Tanggal Lahir</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tanggal_lahir">
+                                    <input type="text" data-format="dd-mm-yyyy" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tanggal_lahir_format">
+                                    <input type="hidden" class="datetimepicker form-control" col="c_tanggal_lahir" name="tanggal_lahir">
                                 </div>
                             </div>
                         </div>
@@ -227,8 +245,8 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="nama_lengkap">
-                                    <label class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" col="c_nama_lengkap" name="nama_lengkap">
+                                    <label class="form-label">Nama Lengkap *</label>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +254,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <select class="form-control" name="jenis_kelamin">
+                                    <select class="form-control" col="c_jenis_kelamin" name="jenis_kelamin">
                                         <option disabled="disabled" selected="selected">-- Pilih Jenis Kelamin --</option>
                                         <option value="L">Laki Laki</option>
                                         <option value="P">Perempuan</option>
@@ -251,7 +269,7 @@
                             <label for="email_address">Pendidikan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" name="pendidikan">
+                                    <select class="form-control show-tick" col="c_pendidikan" name="pendidikan">
                                         <option disabled="disabled" selected="selected">-- Pilih Pendidikan --</option>
                                         <?php if(!empty($ls_pendidikan)){ ?>
                                             <?php foreach ($ls_pendidikan as $key => $value) { ?>
@@ -267,7 +285,7 @@
                             <label for="email_address">Agama</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" name="agama">
+                                    <select class="form-control show-tick" col="c_agama" name="agama">
                                         <option disabled="disabled" selected="selected">-- Pilih Agama --</option>
                                         <?php if(!empty($ls_agama)){ ?>
                                             <?php foreach ($ls_agama as $key => $value) { ?>
@@ -286,7 +304,7 @@
                             <label for="email_address">Fungsional</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="fungsional">
+                                    <select class="form-control show-tick design-select" col="c_fungsional" name="fungsional">
                                         <option disabled="disabled" selected="selected">-- Pilih Fungsional --</option>
                                         <?php if(!empty($ls_fungsional)){ ?>
                                             <?php foreach ($ls_fungsional as $key => $value) { ?>
@@ -302,7 +320,8 @@
                             <label for="email_address">TMT</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tmt">
+                                    <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time..." name="tmt_format">
+                                    <input type="hidden" class="datetimepicker form-control" col="c_tmt" name="tmt">
                                 </div>
                             </div>
                         </div>
@@ -313,7 +332,7 @@
                             <label for="email_address">Department</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="department">
+                                    <select class="form-control show-tick design-select" col="c_department" name="department">
                                         <option disabled="disabled" selected="selected">-- Pilih Department --</option>
                                         <?php if(!empty($ls_department)){ ?>
                                             <?php foreach ($ls_department as $key => $value) { ?>
@@ -329,7 +348,7 @@
                             <label for="email_address">Jabatan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="jabatan">
+                                    <select class="form-control show-tick design-select" col="c_jabatan" name="jabatan">
                                         <option disabled="disabled" selected="selected">-- Pilih Jabatan --</option>
                                         <?php if(!empty($ls_jabatan)){ ?>
                                             <?php foreach ($ls_jabatan as $key => $value) { ?>
@@ -346,7 +365,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" name="no_telepon">
+                                    <input type="text" class="form-control" col="c_no_telepon" name="no_telepon">
                                     <label class="form-label">No Telepon</label>
                                 </div>
                             </div>
@@ -355,7 +374,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" name="kode_pos">
+                                    <input type="text" class="form-control" col="c_kode_pos" name="kode_pos">
                                     <label class="form-label">Kode Pos</label>
                                 </div>
                             </div>
@@ -382,7 +401,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" name="nama_pasangan">
+                                    <input type="text" class="form-control" col="c_nama_pasangan" name="nama_pasangan">
                                     <label class="form-label">Nama Suami / Istri</label>
                                 </div>
                             </div>
@@ -391,7 +410,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" name="jumlah_anak">
+                                    <input type="text" class="form-control" col="c_jumlah_anak" name="jumlah_anak">
                                     <label class="form-label">Jumlah Anak</label>
                                 </div>
                             </div>
@@ -436,7 +455,7 @@
                             <label for="email_address">Kabupaten / Kota</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="kt_kelahiran">
+                                    <select class="form-control show-tick design-select" col="c_kota_kelahiran" name="kt_kelahiran">
                                         
                                     </select>
                                 </div>
@@ -452,7 +471,7 @@
                             <label for="email_address">Alamat Lengkap</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <textarea class="form-control" name="alamat"></textarea>
+                                    <textarea class="form-control" col="c_alamat" name="alamat"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -479,7 +498,7 @@
                             <label for="email_address">Status Karyawan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="status_karyawan">
+                                    <select class="form-control show-tick design-select" col="c_status_karyawan" name="status_karyawan">
                                         <option disabled="disabled" selected="selected">-- Pilih Status Karyawan --</option>
                                         <?php if(!empty($ls_status_karyawan)){ ?>
                                             <?php foreach ($ls_status_karyawan as $key => $value) { ?>
@@ -495,7 +514,7 @@
                             <label for="email_address">Status Pribadi</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="status_pribadi">
+                                    <select class="form-control show-tick design-select" col="c_status_pribadi" name="status_pribadi">
                                         <option disabled="disabled" selected="selected">-- Pilih Status Pribadi --</option>
                                         <?php if(!empty($ls_status_pribadi)){ ?>
                                             <?php foreach ($ls_status_pribadi as $key => $value) { ?>
@@ -511,7 +530,7 @@
                             <label for="email_address">Nama Atasan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="atasan">
+                                    <select class="form-control show-tick design-select" col="c_atasan" name="atasan">
                                         <option disabled="disabled" selected="selected">-- Pilih Atasan --</option>
                                         <?php if(!empty($ls_atasan)){ ?>
                                             <?php foreach ($ls_atasan as $key => $value) { ?>
@@ -546,7 +565,7 @@
                             <label for="email_address">Lokasi</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick design-select" name="nama_agen">
+                                    <select class="form-control show-tick design-select" col="c_lokasi_agen" name="nama_agen">
                                         <option disabled="disabled" selected="selected">-- Pilih Lokasi --</option>
                                         <?php if(!empty($ls_lokasi_agen)){ ?>
                                             <?php foreach ($ls_lokasi_agen as $key => $value) { ?>
@@ -570,7 +589,7 @@
                             <label for="email_address">Catatan</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <textarea class="form-control" name="catatan"></textarea>
+                                    <textarea class="form-control" col="c_catatan" name="catatan"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -579,7 +598,15 @@
             </div>
         </div>
     </div>
+
+    <button onclick="submit_add($(this))" id="pegawai_btn_submit" type="button" class="btn bg-blue btn-circle-lg waves-effect waves-circle waves-float">
+        <i class="material-icons">save</i>
+    </button>
 </div>
+
+
+
+
 
 <!-- NIK, NAMA, DEPART, JBT, WILAYAH, STATUS,  -->
 
@@ -593,5 +620,18 @@
         padding-top: 2px;
         padding-bottom: 2px;
     }
+
+    #pegawai_btn_submit {
+        position: fixed;
+        right: 30px;
+        bottom: 30px;
+        width: 70px;
+        height: 70px;
+    }
+
+/*    #profil_card div.card.profile-card {
+        position: fixed;
+        width: 16%;
+    }*/
 
 </style>

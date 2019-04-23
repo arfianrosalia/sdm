@@ -34,6 +34,8 @@
 		public function getListPegawaiByID($id=null){
 			$val = '
 						p.*,
+						date_format(p.tanggal_lahir,"%d %M %Y") as tanggal_lahir_format,
+						date_format(p.tmt,"%d %M %Y") as tmt_format,
 						master_gelar.id as gelar,
 						nama_fungsional,
 						nama_jabatan,
