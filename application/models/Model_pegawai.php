@@ -23,6 +23,7 @@
 					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
 					->join('master_agen','master_agen.id=p.lokasi_agen','left')
+					->order_by('p.id','desc')
 					->get();
 			if($load->num_rows()>0){
 				return $load->result();
@@ -33,7 +34,42 @@
 
 		public function getListPegawaiByID($id=null){
 			$val = '
-						p.*,
+						p.id,
+						p.nik,
+						p.no_ktp,
+						p.nama_lengkap,
+						p.nama_singkat,
+						p.fungsional,
+						p.tmt,
+						p.department,
+						p.lokasi_agen,
+						p.wilayah,
+						p.jabatan,
+						p.status_karyawan,
+						p.gelar,
+						p.tanggal_lahir,
+						p.pendidikan,
+						p.agama,
+						p.kota_kelahiran,
+						p.status_pribadi,
+						p.alamat,
+						p.kode_pos,
+						p.kewarganegaraan,
+						p.no_telepon,
+						p.catatan,
+						p.nama_pasangan,
+						p.jumlah_anak,
+						p.atasan,
+						p.jenis_kelamin,
+						p.insert_by,
+						p.insert_date,
+						p.update_by,
+						p.update_date,
+						p.delete_by,
+						p.delete_date,
+						p.is_delete,
+
+
 						date_format(p.tanggal_lahir,"%d %M %Y") as tanggal_lahir_format,
 						date_format(p.tmt,"%d %M %Y") as tmt_format,
 						master_gelar.id as gelar,

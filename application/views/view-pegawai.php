@@ -77,7 +77,7 @@
 </div>
 
 <div class="row clearfix" id="form_pegawai" style="display: none;">
-    <div class="col-xs-12 col-sm-3" id="profil_card">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" id="profil_card">
         <div class="card profile-card" >
             <div class="profile-header">&nbsp;</div>
             <div class="profile-body">
@@ -223,7 +223,7 @@
                                         <?php if(!empty($ls_gelar)){ ?>
                                             <?php foreach ($ls_gelar as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_gelar; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -274,7 +274,7 @@
                                         <?php if(!empty($ls_pendidikan)){ ?>
                                             <?php foreach ($ls_pendidikan as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_pendidikan; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -290,7 +290,7 @@
                                         <?php if(!empty($ls_agama)){ ?>
                                             <?php foreach ($ls_agama as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_agama; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -309,7 +309,7 @@
                                         <?php if(!empty($ls_fungsional)){ ?>
                                             <?php foreach ($ls_fungsional as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_fungsional; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -337,7 +337,7 @@
                                         <?php if(!empty($ls_department)){ ?>
                                             <?php foreach ($ls_department as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_department; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -353,7 +353,7 @@
                                         <?php if(!empty($ls_jabatan)){ ?>
                                             <?php foreach ($ls_jabatan as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_jabatan; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -444,7 +444,7 @@
                                         <?php if(!empty($ls_provinsi)){ ?>
                                             <?php foreach ($ls_provinsi as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -503,7 +503,7 @@
                                         <?php if(!empty($ls_status_karyawan)){ ?>
                                             <?php foreach ($ls_status_karyawan as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_karyawan; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -519,7 +519,7 @@
                                         <?php if(!empty($ls_status_pribadi)){ ?>
                                             <?php foreach ($ls_status_pribadi as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_pribadi; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -535,7 +535,7 @@
                                         <?php if(!empty($ls_atasan)){ ?>
                                             <?php foreach ($ls_atasan as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_lengkap; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -570,7 +570,7 @@
                                         <?php if(!empty($ls_lokasi_agen)){ ?>
                                             <?php foreach ($ls_lokasi_agen as $key => $value) { ?>
                                                 <option value="<?php echo $value->id; ?>"><?php echo $value->nama_agen; ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>

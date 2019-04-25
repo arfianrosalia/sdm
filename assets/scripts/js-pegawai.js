@@ -61,11 +61,12 @@ function resetPhoto(){
 	}
 }
 
+var c_token = "";
 function detail(x=null){
+	c_token = x;
 	resetPhoto();
 	resetForm();
-	$('#list_pegawai').fadeOut('fast',function(){
-		
+	$.when($('#list_pegawai').fadeOut('fast',function(){
 		state="EDIT";
 		$.post(URL+'pegawai/pegawaiByID',{token:x}).done(function(data){
 			try{
@@ -76,11 +77,7 @@ function detail(x=null){
 					$.each(res.result,function(key,val){
 						$('#form_detail [name="'+key+'"]').val(val);
 
-						if(res.result.foto!=''){
-							$('#foto_profile').attr('src',res.result.foto);
-						}else{
-							$('#foto_profile').attr('src',URL+'assets/images/user.png');
-						}
+						
 						$('#foto_profile').attr('width','75%');
 						$('#foto_profile').attr('height','75%');
 
@@ -102,19 +99,6 @@ function detail(x=null){
 					$('#form_detail input[name="nik"]').removeAttr('col');
 
 					ch_prov_kota_kelahiran(res.result.provinsi_kelahiran,res.result.kabupaten_kelahiran);
-
-
-					// $.post(URL+'pegawai/getKotaBy',{x:res.result.provinsi_kelahiran}).done(function(dt){
-					// 	var r = JSON.parse(dt);
-
-					// 	r.result.forEach(function(item,i){
-					// 		$("select[name='kt_kelahiran']").append(new Option(item.name, item.id));
-					// 	});
-
-					// 	$("select[name='kt_kelahiran']").val(res.result.kabupaten_kelahiran);
-					// }).fail(function(e){
-
-					// });
 				}
 
 
@@ -124,7 +108,9 @@ function detail(x=null){
 			}finally{
 
 			}
-		}).fail();
+		}).fail()
+	})).then(function(){
+		genFoto(x);
 	});
 }
 
@@ -136,6 +122,19 @@ $(window).on('popstate', function(event) {
 		});
 	}
 });
+
+function genFoto(x){
+	$.post(URL+'pegawai/getImg',{token:x}).done(function(data){
+		var r = JSON.parse(data);
+		if(r.result.toString()==""){
+			$('#foto_profile').attr('src',URL+'assets/images/user.png');
+		}else{
+			$('#foto_profile').attr('src',r.result);
+		}
+	}).fail(function(e){
+
+	});
+}
 
 function ch_prov_kota_kelahiran(id_prov=null,id_kota=null){
 	$.post(URL+'pegawai/getKotaBy',{x:id_prov}).done(function(dt){
@@ -254,7 +253,13 @@ function submit_add(x){
 			if(first==""){
 				first=x.parent().find('select[col]').eq(index);
 			}
-			x.parent().find('select[col]').eq(index).animate({'backgroundColor':'red'},200).animate({'backgroundColor':'white'},200);
+
+			if(x.parent().find('select[col]').hasClass('design-select')==true){
+				// alert('');
+				x.parent().find('select[col]').eq(index).parent().find('.selection .select2-selection').animate({'backgroundColor':'red'},200).animate({'backgroundColor':'white'},200);
+			}else{
+				x.parent().find('select[col]').eq(index).animate({'backgroundColor':'red'},200).animate({'backgroundColor':'white'},200);
+			}
 		}
 	});
 
@@ -272,9 +277,11 @@ function submit_add(x){
 		}
 	});
 
-	first.focus();
 	data['c_foto'] = $('#foto_profile').attr('src');
 	
+	if(first.toString() != ""){
+		first.focus();
+	}
 
 	if(validate>0){
 		$.alert('Form belum lengkap');
@@ -288,12 +295,11 @@ function submit_add(x){
 		}
 
 		if(state=='EDIT'){
-			alert('EDIT');
-			// $.post(URL+'pegawai/insertPegawai',{data:data}).done(function(data){
-			// 	alert(data);
-			// }).fail(function(){
+			$.post(URL+'pegawai/updatePegawai',{token:c_token,data:data}).done(function(data){
+				alert(data);
+			}).fail(function(){
 
-			// });
+			});
 		}
 	}
 
