@@ -334,7 +334,7 @@ function submit_add(x){
 				                            		text:'OKE',
 				                            		btnClass:'bg-green waves-effect',
 				                            		action:function(){
-				                            			location.href = URL+'pegawai/list_pegawai';
+				                            			location.href = URL+'pegawai/list_pegawai'; 
 				                            		}
 				                            	}
 				                            }
