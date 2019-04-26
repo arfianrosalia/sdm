@@ -484,6 +484,7 @@
 
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/font-awesome/fa.min.js"></script>
 
     <!-- Select Plugin Js -->
     <!-- <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/js/bootstrap-select.js"></script> -->

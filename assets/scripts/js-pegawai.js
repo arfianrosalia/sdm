@@ -31,8 +31,10 @@ function formAdd(){
 
 		$.post(URL+'pegawai/genNIK').done(function(data){
 			try{
-				res = JSON.parse(data);
+				var res = JSON.parse(data);
+
 				if(res.status==1){
+
 					$('#form_detail').find('input[name="nik"]').val(res.result);
 					if($('#form_detail input[name="nik"]').val()!=''){
 						$('#form_detail input[name="nik"]').parent().addClass('focused');
@@ -284,22 +286,224 @@ function submit_add(x){
 	}
 
 	if(validate>0){
-		$.alert('Form belum lengkap');
+		// $.alert('Form belum lengkap');
+		$.confirm({
+            icon: 'fa fa-exclamation-triangle',
+            closeIcon: false,
+            animation: 'scale',
+            type: 'red',
+            title:'Pesan Error',
+            content:'Form belum lengkap. Silakan melengkapi semua form terlebih dahulu.',
+            buttons:{
+            	submit:{
+            		text:'OKE',
+            		btnClass:'bg-light waves-effect'
+            	}
+            }
+        });
 	}else{
 		if(state=='ADD'){
-			$.post(URL+'pegawai/insertPegawai',{data:data}).done(function(data){
-				alert(data);
-			}).fail(function(){
+			$.confirm({
+                icon: 'fa fa-question-circle',
+                theme: 'modern',
+                closeIcon: false,
+                animation: 'scale',
+                type: 'orange',
+                title:'',
+                content:'Apakah data sudah benar?',
+                buttons:{
+                	submit:{
+                		text:'Ya. Benar.',
+                		btnClass:'bg-green waves-effect',
+                		action:function(){
+                			$.post(URL+'pegawai/insertPegawai',{data:data}).done(function(data){
+                				try{
+	                				var res = JSON.parse(data);
 
-			});
+									if(res.status==1){
+										$.confirm({
+				                            icon: 'fa fa-check',
+				                            theme: 'modern',
+				                            closeIcon: false,
+				                            animation: 'scale',
+				                            type: 'green',
+				                            title:'',
+				                            content:res.message,
+				                            buttons:{
+				                            	submit:{
+				                            		text:'OKE',
+				                            		btnClass:'bg-green waves-effect',
+				                            		action:function(){
+				                            			location.href = URL+'pegawai/list_pegawai';
+				                            		}
+				                            	}
+				                            }
+				                        });
+									}else{
+										$.confirm({
+				                            icon: 'fa fa-exclamation-triangle',
+				                            theme: 'modern',
+				                            closeIcon: false,
+				                            animation: 'scale',
+				                            type: 'red',
+				                            title:'',
+				                            content:'Gagal menambah data. Err Code : 762345',
+				                            buttons:{
+				                            	submit:{
+				                            		text:'OKE',
+				                            		btnClass:'bg-green waves-effect'
+				                            	}
+				                            }
+				                        });
+									}
+                				}catch(e){
+                					$.confirm({
+			                            icon: 'fa fa-check',
+			                            theme: 'modern',
+			                            closeIcon: false,
+			                            animation: 'scale',
+			                            type: 'red',
+			                            title:'',
+			                            content:'Error Parsing. Err Code : 762346',
+			                            buttons:{
+			                            	submit:{
+			                            		text:'OKE',
+			                            		btnClass:'bg-green waves-effect'
+			                            	}
+			                            }
+			                        });
+                				}
+							}).fail(function(){
+								$.confirm({
+		                            icon: 'fa fa-check',
+		                            theme: 'modern',
+		                            closeIcon: false,
+		                            animation: 'scale',
+		                            type: 'red',
+		                            title:'',
+		                            content:'Koneksi bermasalah. Err Code : 762347',
+		                            buttons:{
+		                            	submit:{
+		                            		text:'OKE',
+		                            		btnClass:'bg-green waves-effect'
+		                            	}
+		                            }
+		                        });
+							});
+                			// jconfirm.instances[0].close();
+                			// location.href = URL;
+                		}
+                	},cancel:{
+                		text:'Batal',
+                		btnClass:'bg-light waves-effect'
+                	}
+                }
+            });
+			
+
+			// $.post(URL+'pegawai/insertPegawai',{data:data}).done(function(data){
+			// 	alert(data);
+			// }).fail(function(){
+
+			// });
 		}
 
 		if(state=='EDIT'){
-			$.post(URL+'pegawai/updatePegawai',{token:c_token,data:data}).done(function(data){
-				alert(data);
-			}).fail(function(){
+			$.confirm({
+                icon: 'fa fa-question-circle',
+                theme: 'modern',
+                closeIcon: false,
+                animation: 'scale',
+                type: 'orange',
+                title:'',
+                content:'Anda yakin ingin mengubah data ini?',
+                buttons:{
+                	submit:{
+                		text:'Rubah',
+                		btnClass:'bg-green waves-effect',
+                		action:function(){
+                			$.post(URL+'pegawai/updatePegawai',{token:c_token,data:data}).done(function(data){
+                				try{
+	                				var res = JSON.parse(data);
 
-			});
+									if(res.status==1){
+										$.confirm({
+				                            icon: 'fa fa-check',
+				                            theme: 'modern',
+				                            closeIcon: false,
+				                            animation: 'scale',
+				                            type: 'green',
+				                            title:'',
+				                            content:res.message,
+				                            buttons:{
+				                            	submit:{
+				                            		text:'OKE',
+				                            		btnClass:'bg-green waves-effect'
+				                            	}
+				                            }
+				                        });
+									}else{
+										$.confirm({
+				                            icon: 'fa fa-exclamation-triangle',
+				                            theme: 'modern',
+				                            closeIcon: false,
+				                            animation: 'scale',
+				                            type: 'red',
+				                            title:'',
+				                            content:'Gagal mengubah data. Err Code : 762345',
+				                            buttons:{
+				                            	submit:{
+				                            		text:'OKE',
+				                            		btnClass:'bg-green waves-effect'
+				                            	}
+				                            }
+				                        });
+									}
+                				}catch(e){
+                					$.confirm({
+			                            icon: 'fa fa-check',
+			                            theme: 'modern',
+			                            closeIcon: false,
+			                            animation: 'scale',
+			                            type: 'red',
+			                            title:'',
+			                            content:'Error Parsing. Err Code : 762346',
+			                            buttons:{
+			                            	submit:{
+			                            		text:'OKE',
+			                            		btnClass:'bg-green waves-effect'
+			                            	}
+			                            }
+			                        });
+                				}
+							}).fail(function(){
+								$.confirm({
+		                            icon: 'fa fa-check',
+		                            theme: 'modern',
+		                            closeIcon: false,
+		                            animation: 'scale',
+		                            type: 'red',
+		                            title:'',
+		                            content:'Koneksi bermasalah. Err Code : 762347',
+		                            buttons:{
+		                            	submit:{
+		                            		text:'OKE',
+		                            		btnClass:'bg-green waves-effect'
+		                            	}
+		                            }
+		                        });
+							});
+                			// jconfirm.instances[0].close();
+                			// location.href = URL;
+                		}
+                	},cancel:{
+                		text:'Batal',
+                		btnClass:'bg-light waves-effect'
+                	}
+                }
+            });
+
+			
 		}
 	}
 
@@ -309,6 +513,13 @@ function submit_add(x){
 	// arrSelect.forEach(function(item,index){
 	// 	alert(x.parent().find('input[col]').eq(index).attr('col') + " >> " + x.parent().find('select[col]').eq(index).val());
 	// });
+}
+
+function openImage(x){
+	window.open(
+	  x,
+	  '_blank' // <- This is what makes it open in a new window.
+	);
 }
 
 

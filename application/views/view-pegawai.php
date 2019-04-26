@@ -82,19 +82,19 @@
             <div class="profile-header">&nbsp;</div>
             <div class="profile-body">
                 <div class="image-area">
-                    <a href="javascript:void(0)" onclick="document.getElementById('ft').click();">
-                        <img id="foto_profile" width="75%" height="75%" src="<?php echo base_url(); ?>assets/images/user.png" alt="AdminBSB - Profile Image"/>
+                    <!-- <a href="javascript:void(0)" onclick=""> -->
+                        <img id="foto_profile" width="75%" height="75%" src="<?php echo base_url(); ?>assets/images/user.png" alt="AdminBSB - Profile Image" onclick="openImage($(this).attr('src'))" style="cursor: pointer;" />
                         <input id="ft" type="file" accept="image/*" style="display: none;" onchange="ch_img_profile(this)">
-                    </a>
+                    <!-- </a> -->
                 </div>
                 <div class="content-area">
-                    <h3>Moch. Arfian A</h3>
-                    <p>Web Software Developer</p>
-                    <p>IT Programmer</p>
+                    <h3 id="profile_nama"></h3>
+                    <p id="profile_department"></p>
+                    <p id="profile_jabatan"></p>
                 </div>
             </div>
             <div class="profile-footer">
-                <ul>
+                <!-- <ul>
                     <li>
                         <span>Followers</span>
                         <span>1.234</span>
@@ -107,8 +107,8 @@
                         <span>Friends</span>
                         <span>14.252</span>
                     </li>
-                </ul>
-                <button class="btn btn-primary btn-lg waves-effect btn-block ">FOLLOW</button>
+                </ul> -->
+                <button class="btn btn-primary btn-lg waves-effect btn-block" onclick="document.getElementById('ft').click()">Ubah Foto Profil</button>
             </div>
         </div>
 
@@ -163,7 +163,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id="form_detail">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
         <div class="row clearfix">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="info-box bg-pink hover-expand-effect">
