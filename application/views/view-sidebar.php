@@ -1,5 +1,5 @@
 <li class="active">
-    <a href="index.html">
+    <a href="<?php echo base_url('/'); ?>">
         <i class="material-icons">insert_chart</i>
         <span>Dashboard</span>
     </a>
@@ -16,20 +16,33 @@
         <span>Master</span>
     </a>
     <ul class="ml-menu">
-        <li>
-            <a href="pages/examples/profile.html">Department</a>
+          <li>
+            <a href="<?php echo base_url('master/master_agama'); ?>">Agama</a>
         </li>
         <li>
-            <a href="pages/examples/sign-in.html">Jabatan</a>
+            <a href="<?php echo base_url('master/master_departmen'); ?>">Department</a>
         </li>
         <li>
-            <a href="pages/examples/sign-up.html">Status Karyawan</a>
+            <a href="<?php echo base_url('master/master_jabatan'); ?>">Jabatan</a>
         </li>
         <li>
-            <a href="pages/examples/forgot-password.html">Gelar Nama</a>
+            <a href="<?php echo base_url('master/master_StatusKaryawan'); ?>">Status Karyawan</a>
         </li>
         <li>
-            <a href="pages/examples/blank.html">Pendidikan</a>
+            <a href="<?php echo base_url('master/master_GelarNama'); ?>">Gelar Nama</a>
+        </li>
+        <li>
+            <a href="<?php echo base_url('master/master_pendidikan'); ?>">Pendidikan</a>
+        </li>
+          <li>
+            <a href="<?php echo base_url('master/master_agen'); ?>">Agen</a>
+        </li>
+          <li>
+            <a href="<?php echo base_url('master/master_fungsional'); ?>">Fungsional</a>
+        </li>
+       
+        <li>
+            <a href="<?php echo base_url('master/master_StatusPribadi'); ?>">Status Pribadi</a>
         </li>
         <li>
             <a href="javascript:void(0);" class="menu-toggle">
@@ -37,13 +50,16 @@
             </a>
             <ul class="ml-menu">
                 <li>
-                    <a href="pages/examples/profile.html">Provinsi</a>
+                    <a href="<?php echo base_url('master/master_wilayahProvinsi'); ?>">Provinsi</a>
                 </li>
                 <li>
-                    <a href="pages/examples/sign-in.html">Kota</a>
+                    <a href="<?php echo base_url('master/master_wilayahKabupaten'); ?>">Kabupaten</a>
                 </li>
                 <li>
-                    <a href="pages/examples/sign-up.html">Wilayah</a>
+                    <a href="<?php echo base_url('master/master_wilayahKecamatan'); ?>">Kecamatan</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url('master/master_wilayahKelurahan'); ?>">Keluarahan</a>
                 </li>
             </ul>
         </li>

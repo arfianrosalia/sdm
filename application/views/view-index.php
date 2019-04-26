@@ -20,6 +20,9 @@
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
+    <!-- JS komfrim -->
+    <link href="<?php echo base_url(); ?>assets/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet" />
+
     <!-- Waves Effect Css -->
     <link href="<?php echo base_url(); ?>assets/plugins/node-waves/waves.css" rel="stylesheet" />
 
@@ -80,7 +83,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">ADMINBSB - MATERIAL DESIGN</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">ADMINBSB - MATERIAL DESIGN</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -477,6 +480,10 @@
     	</div>
     </section>
 
+     <script type="text/javascript">
+        var URL = "<?php echo base_url(); ?>";
+    </script>
+
     <!-- Jquery Core Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.js"></script>
     <script src="<?php echo base_url('assets'); ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -492,6 +499,9 @@
     <!-- Datatable -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+     <!-- JS QUERY COMFRIM -->
+     <script src="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.js"></script>
 
     <!-- Slimscroll Plugin Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -530,6 +540,7 @@
     <!-- Custom Js -->
     <script src="<?php echo base_url(); ?>assets/ext/js/admin.js"></script>
     <script src="<?php echo base_url(); ?>assets/ext/js/pages/index.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/font-awesome/fa.min.js"></script>
 
     <!-- Demo Js -->
     <script src="<?php echo base_url(); ?>assets/ext/js/demo.js"></script>
