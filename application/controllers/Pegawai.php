@@ -70,6 +70,18 @@ class Pegawai extends CI_Controller {
 		}
 	}
 
+	public function getImg(){
+		$token = $this->input->post('token');
+		$img = $this->db->select('foto')->get_where('personalia_pegawai',array('id_token'=>$token));
+
+
+		if($img->num_rows()>0){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$img->row()->foto));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
 	public function getProvinsi(){
 		$this->load->model('model_pegawai');	
 		$var['ls_provinsi'] = $this->model_pegawai->getProvinsi();
@@ -124,6 +136,69 @@ class Pegawai extends CI_Controller {
 			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kota']));
 		}else{
 			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function genNIK(){
+		$getMax = $this->db
+					->select("MAX(CAST(nik AS UNSIGNED)) as LASTNIK")
+					->get('personalia_pegawai')
+					->row()->LASTNIK;
+
+		if(!empty($getMax)){
+			echo json_encode(array('status'=>1,'message'=>'Generated Success','result'=>((int)$getMax+1)));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Error Generated','result'=>null));
+		}
+	}
+
+	public function insertPegawai(){
+		$data = $this->input->post('data');
+		$token = md5(sha1($data['c_nik']));
+
+		$ck_dup = $this->db->get_where('personalia_pegawai',array('id_token'=>$token));
+		if($ck_dup->num_rows()>0){
+			echo json_encode(array('status'=>0,'message'=>'Data dengan NIK tersebut sudah ada. Silahkan muat ulang.'));
+		}else{
+			$fix = (Object)array();
+			foreach ($data as $key => $value) {
+				$k_fix = str_replace("c_","",$key);
+				$fix->$k_fix = $value;
+			}
+
+			$fix->id_token = $token;
+
+			
+			$insert = $this->db->insert('personalia_pegawai',$fix);
+
+			echo json_encode(array('status'=>1,'message'=>'Berhasil memasukkan Data.'));
+		}
+	}
+
+	public function updatePegawai(){
+		$token = $this->input->post('token');
+		$data = $this->input->post('data');
+
+		$ck_dup = $this->db->get_where('personalia_pegawai',array('id_token'=>$token));
+
+		if($ck_dup->num_rows()>0){
+			$fix = (Object)array();
+			foreach ($data as $key => $value) {
+				$k_fix = str_replace("c_","",$key);
+				$fix->$k_fix = $value;
+			}
+
+			
+			$update = $this->db->where('id_token',$token)->update('personalia_pegawai',$fix);
+
+			if($update){
+				echo json_encode(array('status'=>1,'message'=>'Berhasil mengubah Data.'));
+			}else{
+				echo json_encode(array('status'=>0,'message'=>'Gagal mengubah Data.'));
+			}
+
+		}else{
+
 		}
 	}
 }
