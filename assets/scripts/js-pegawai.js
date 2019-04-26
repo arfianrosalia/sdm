@@ -57,6 +57,7 @@ function formAdd(){
 
 function resetPhoto(){
 	$('#foto_profile').attr('src',URL+'assets/images/user.png');
+	
 	if(iCropTmp!=null){
 		iCropTmp.croppie('destroy');
 		$('#panel-foto').fadeOut('fast');
@@ -130,8 +131,10 @@ function genFoto(x){
 		var r = JSON.parse(data);
 		if(r.result.toString()==""){
 			$('#foto_profile').attr('src',URL+'assets/images/user.png');
+			
 		}else{
 			$('#foto_profile').attr('src',r.result);
+			
 		}
 	}).fail(function(e){
 
@@ -217,6 +220,8 @@ $('.upload-result').on('click', function (ev) {
 			width:'147px',
 			height:'148px'
 		});
+
+		
 		// console.log(resp);
 	});
 });
@@ -515,12 +520,19 @@ function submit_add(x){
 	// });
 }
 
-function openImage(x){
-	window.open(
-	  x,
-	  '_blank' // <- This is what makes it open in a new window.
-	);
+function openImage(x=null){
+	// window.open(
+	//   x,
+	//   '_blank' // <- This is what makes it open in a new window.
+	// );
+	$.dialog({
+		title:'Foto Profil',
+		content:'<img src="'+x.attr('src')+'"/>'
+	});
 }
+
+
+
 
 
 // var c = document.getElementById("ft-canvas");

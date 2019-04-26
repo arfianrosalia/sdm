@@ -33,9 +33,9 @@
     <link href="<?php echo base_url(); ?>assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
-    <link href="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/plugins/select2/select2.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/plugins/crop/croppie.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/plugins/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>assets/ext/css/style.css" rel="stylesheet">
@@ -495,13 +495,15 @@
 
     <!-- Select Plugin Js -->
     <!-- <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-migrate/jquery-migrate.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
     <!-- Datatable -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
      <!-- JS QUERY COMFRIM -->
-     <script src="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+    <script src="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.js"></script>
 
     <!-- Slimscroll Plugin Js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -534,7 +536,6 @@
     <script src="<?php echo base_url(); ?>assets/plugins/crop/croppie.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <script src="<?php echo base_url('assets'); ?>/plugins/jquery-confirm/jquery-confirm.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.js"></script>
 
     <!-- Custom Js -->
