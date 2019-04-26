@@ -16,8 +16,11 @@
         <span>Master</span>
     </a>
     <ul class="ml-menu">
+          <li>
+            <a href="<?php echo base_url('master/master_agama'); ?>">Agama</a>
+        </li>
         <li>
-            <a href="<?php echo base_url('master/master_departemen'); ?>">Department</a>
+            <a href="<?php echo base_url('master/master_departmen'); ?>">Department</a>
         </li>
         <li>
             <a href="<?php echo base_url('master/master_jabatan'); ?>">Jabatan</a>
@@ -30,6 +33,16 @@
         </li>
         <li>
             <a href="<?php echo base_url('master/master_pendidikan'); ?>">Pendidikan</a>
+        </li>
+          <li>
+            <a href="<?php echo base_url('master/master_agen'); ?>">Agen</a>
+        </li>
+          <li>
+            <a href="<?php echo base_url('master/master_fungsional'); ?>">Fungsional</a>
+        </li>
+       
+        <li>
+            <a href="<?php echo base_url('master/master_StatusPribadi'); ?>">Status Pribadi</a>
         </li>
         <li>
             <a href="javascript:void(0);" class="menu-toggle">
