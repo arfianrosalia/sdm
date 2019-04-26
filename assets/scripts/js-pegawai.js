@@ -12,7 +12,6 @@ $('.datetimepicker').bootstrapMaterialDatePicker({
 	var nDate = c.getFullYear() + "-" + nMonth + "-" + nDay;
 	$(this).parent().find('input[type="hidden"]').val(nDate);
 });
-// $('.design-select').select2();
 
 var iCropTmp;
 var state = "";
@@ -83,16 +82,7 @@ function detail(x=null){
 						
 						$('#foto_profile').attr('width','75%');
 						$('#foto_profile').attr('height','75%');
-
-						// var image = document.createElement('img');
-    
-						// image.src=res.result.foto;
-						    
-						// image.width=100;
-						// image.height=100;
-						// image.alt="here should be some image";
-						    
-						// document.body.appendChild(image);
+											
 						
 						if($('#form_detail input[name="'+key+'"]').val()!=''){
 							$('#form_detail input[name="'+key+'"]').parent().addClass('focused');
@@ -181,8 +171,7 @@ function ch_img_profile(x,id=null,group_key=null,item_key=null){
 
             img.src = e.target.result;
 
-            var iCrop = $('#upload-demo').croppie({
-			    // enableExif: true,
+            var iCrop = $('#upload-demo').croppie({			    
 			    url:img.src,
 			    viewport: {
 			        width: 350,
@@ -220,9 +209,6 @@ $('.upload-result').on('click', function (ev) {
 			width:'147px',
 			height:'148px'
 		});
-
-		
-		// console.log(resp);
 	});
 });
 
@@ -261,8 +247,7 @@ function submit_add(x){
 				first=x.parent().find('select[col]').eq(index);
 			}
 
-			if(x.parent().find('select[col]').hasClass('design-select')==true){
-				// alert('');
+			if(x.parent().find('select[col]').hasClass('design-select')==true){				
 				x.parent().find('select[col]').eq(index).parent().find('.selection .select2-selection').animate({'backgroundColor':'red'},200).animate({'backgroundColor':'white'},200);
 			}else{
 				x.parent().find('select[col]').eq(index).animate({'backgroundColor':'red'},200).animate({'backgroundColor':'white'},200);
@@ -291,7 +276,6 @@ function submit_add(x){
 	}
 
 	if(validate>0){
-		// $.alert('Form belum lengkap');
 		$.confirm({
             icon: 'fa fa-exclamation-triangle',
             closeIcon: false,
@@ -395,8 +379,6 @@ function submit_add(x){
 		                            }
 		                        });
 							});
-                			// jconfirm.instances[0].close();
-                			// location.href = URL;
                 		}
                 	},cancel:{
                 		text:'Batal',
@@ -405,12 +387,6 @@ function submit_add(x){
                 }
             });
 			
-
-			// $.post(URL+'pegawai/insertPegawai',{data:data}).done(function(data){
-			// 	alert(data);
-			// }).fail(function(){
-
-			// });
 		}
 
 		if(state=='EDIT'){
@@ -497,9 +473,7 @@ function submit_add(x){
 		                            	}
 		                            }
 		                        });
-							});
-                			// jconfirm.instances[0].close();
-                			// location.href = URL;
+							});                			                			
                 		}
                 	},cancel:{
                 		text:'Batal',
@@ -512,33 +486,11 @@ function submit_add(x){
 		}
 	}
 
-
-
-
-	// arrSelect.forEach(function(item,index){
-	// 	alert(x.parent().find('input[col]').eq(index).attr('col') + " >> " + x.parent().find('select[col]').eq(index).val());
-	// });
 }
 
-function openImage(x=null){
-	// window.open(
-	//   x,
-	//   '_blank' // <- This is what makes it open in a new window.
-	// );
+function openImage(x=null){				
 	$.dialog({
 		title:'Foto Profil',
 		content:'<img src="'+x.attr('src')+'"/>'
 	});
 }
-
-
-
-
-
-// var c = document.getElementById("ft-canvas");
-// var ctx = c.getContext("2d");
-// var img = document.getElementById("scream");
-// ctx.drawImage(img, 0, 0, 300,300);
-
-// console.log(ctx.toDataURL("image/jpeg"));
-// $('#scream1').attr('src', c.toDataURL("image/jpeg"));
