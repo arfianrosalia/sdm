@@ -9,7 +9,7 @@
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
                         <h2>LIST GELAR NAMA</h2><br>
-                         <button type="button" class="btn btn-success waves-effect">
+                         <button type="button" class="btn btn-success waves-effect" onclick="addGelarNama()">
                                 <i class="material-icons">queue</i>
                                 <span>Tambah Data</span>
                          </button>
@@ -41,11 +41,11 @@
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">
                             
-                                    <button type="button" class="btn btn-warning waves-effect btn-xs">
-                                    <i class="material-icons">create</i>
+                               <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
+                                    <span class="fa fa-pen"></span>
                                 </button>
-                                <button type="button" class="btn btn-danger waves-effect btn-xs">
-                                    <i class="material-icons">delete</i>
+                                <button type="button" class="btn btn-danger waves-effect btn-xs" onclick="hapus(`<?php echo $value->id;?>`,$(this))">
+                                    <span class="fa fa-trash"></span>
                                 </button>
 
                             </td>

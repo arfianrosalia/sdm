@@ -42,11 +42,11 @@
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">
                             
-                                    <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
-                                    <i class="material-icons">create</i>
+                                <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
+                                    <span class="fa fa-pen"></span>
                                 </button>
                                 <button type="button" class="btn btn-danger waves-effect btn-xs" onclick="hapus(`<?php echo $value->id;?>`,$(this))">
-                                    <i class="material-icons">delete</i>
+                                    <span class="fa fa-trash"></span>
                                 </button>
 
                             </td>

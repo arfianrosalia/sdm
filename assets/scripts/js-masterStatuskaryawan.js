@@ -6,27 +6,27 @@ $('#tb_master').DataTable({
 
 
 
-function addDeparment(){       
+function addStatusKaryawan(){       
 	var form=`				<div class="body">
 							<form class="form-horizontal">
                                 
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA DEPARTMENT</label>
+                                        <label for="email_address_2">NAMA STATUS KARYAWAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_department" placeholder="Masukan Nama Department" required>
+                                                <input type="text" class="form-control" name="nama_StatusKaryawan" placeholder="Masukan Nama Stastus Karyawan" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">KETERANGAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea>
+                                            	 <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea> 
                                             </div>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@ function addDeparment(){
 
 
 	$.confirm({
-    title: 'INPUT DEPARTMENT',
+    title: 'INPUT STATUS KARYAWAN',
     columnClass:'col-md-6 col-md-offset-3 ',
     animation: 'scale',
     closeAnimation: 'rotateYR', 
@@ -50,7 +50,7 @@ function addDeparment(){
             text: 'Simpan',
             btnClass: 'btn-blue',
             action: function () {
-                var nama = this.$content.find('input[name="nama_department"]').val();
+                var nama = this.$content.find('input[name="nama_StatusKaryawan"]').val();
                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
                 if(nama==''|| keterangan==''){
                     $.alert('Form Belum Diisi lengkap..!');
@@ -58,7 +58,7 @@ function addDeparment(){
                 }else{
                     $.ajax({
                         type : 'POST',
-                        url  :  URL+'master/add_department',
+                        url  :  URL+'master/add_StatusKaryawan',
                         data : {nama : nama , keterangan : keterangan},
                         success: function(data){
                                     $.confirm({
@@ -75,7 +75,7 @@ function addDeparment(){
                                                     text:'CLOSE',
                                                     btnClass:'btn-green waves waves-effect',
                                                     action:function(){
-                                                       window.location.reload();  
+                                                      window.location.reload();   
                                                     }
                                                 }
                                             }
@@ -116,7 +116,7 @@ function hapus(id,el){
                     text:'HAPUS',
                     btnClass:'btn-red waves waves-effect',
                     action:function(){
-                        $.post(URL+'master/delete_department',{id:id}).done(function(data){
+                        $.post(URL+'master/delete_StatusKaryawan',{id:id}).done(function(data){
                             if (data=='1') {
                                 el.closest('tr').remove();
                                 $('#tb_master').DataTable().draw('false');
@@ -133,7 +133,7 @@ function hapus(id,el){
                                                     text:'CLOSE',
                                                     btnClass:'btn-green waves waves-effect',
                                                     action:function(){
-                                                        window.location.reload(); 
+                                                      window.location.reload();   
                                                     }
                                                 }
                                             }
@@ -163,7 +163,7 @@ function edit(id,el){
                  title:'Edit Data',
                   content:function(){
                     var self = this;
-                    return $.post(URL+'master/get_idDepartment/',{id:id}).done(function(data){
+                    return $.post(URL+'master/get_idStatusKaryawan/',{id:id}).done(function(data){
                         try{
                             var res = JSON.parse(data);
                             var form = `
@@ -171,25 +171,26 @@ function edit(id,el){
                             <form class="form-horizontal">
                                 <input type="hidden" name="id" value="`+id+`">
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA DEPARTMENT</label>
+                                        <label for="email_address_2">NAMA STATUS KARYAWAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_department" value="`+res.nama_department+`">
+                                                <input type="text" class="form-control" name="nama_Stastus Karyawan" value="`+res.nama_status_karyawan+`">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
+                                    </div><br><br><br>
+                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">KETERANGAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea class="form-control" name="keterangan">`+res.keterangan+`</textarea>
+                                                <textarea type="text" class="form-control" name="keterangan" >`+res.keterangan+`</textarea> 
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 
                             </form>
                             </div>
@@ -214,15 +215,15 @@ function edit(id,el){
                             btnClass: 'btn-blue',
                             action: function () {
                                 var id = this.$content.find('input[name="id"]').val();
-                                var nama = this.$content.find('input[name="nama_department"]').val();
-                                var keterangan = this.$content.find('textarea[name="keterangan"]').val();
-                                if(nama==''|| keterangan==''){
+                                var nama = this.$content.find('input[name="nama_StatusKaryawan"]').val();
+                                var keterangan = this.$content.find('input[name="keterangan"]').val();
+                                if(nama==''|| ALAMAT==''){
                                    $.alert('Form Belum Diisi lengkap..!');
                                    return false;
                             }else{
                                 $.ajax({
                                  type : 'POST',
-                                 url  :  URL+'master/update_department',
+                                 url  :  URL+'master/update_StatusKaryawan',
                                   data : {id : id ,nama : nama , keterangan : keterangan},
                                   success: function(data){
                                     if (data=='true') {

@@ -10,7 +10,7 @@
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
                         <h2>LIST MASTER STATUS KARYAWAN</h2><br>
-                        <button type="button" class="btn btn-success waves-effect">
+                        <button type="button" class="btn btn-success waves-effect" onclick="addStatusKaryawan()">
                                 <i class="material-icons">queue</i>
                                 <span>Tambah Data</span>
                          </button>
@@ -38,15 +38,15 @@
                         <tr>
                             <td width="20px" align="center"><?php echo $no;?></td>
                             <td><?php echo $value->id;?></td>
-                            <td><?php echo $value->nama_status;?></td>
+                            <td><?php echo $value->nama_status_karyawan;?></td>
                             <td><?php echo $value->keterangan; ?></td>
                               <td align="center">
                             
-                                    <button type="button" class="btn btn-warning waves-effect btn-xs">
-                                    <i class="material-icons">create</i>
+                                <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
+                                    <span class="fa fa-pen"></span>
                                 </button>
-                                <button type="button" class="btn btn-danger waves-effect btn-xs">
-                                    <i class="material-icons">delete</i>
+                                <button type="button" class="btn btn-danger waves-effect btn-xs" onclick="hapus(`<?php echo $value->id;?>`,$(this))">
+                                    <span class="fa fa-trash"></span>
                                 </button>
 
                             </td>
