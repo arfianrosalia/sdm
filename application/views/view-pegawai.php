@@ -82,10 +82,11 @@
             <div class="profile-header">&nbsp;</div>
             <div class="profile-body">
                 <div class="image-area">
-                    <!-- <a href="javascript:void(0)" onclick=""> -->
-                        <img id="foto_profile" width="75%" height="75%" src="<?php echo base_url(); ?>assets/images/user.png" alt="AdminBSB - Profile Image" onclick="openImage($(this).attr('src'))" style="cursor: pointer;" />
-                        <input id="ft" type="file" accept="image/*" style="display: none;" onchange="ch_img_profile(this)">
+                    <!-- <a href="" id="a_foto_profile"> -->
+                        
+                        <img id="foto_profile" width="75%" height="75%" src="<?php echo base_url(); ?>assets/images/user.png" alt="AdminBSB - Profile Image" style="cursor: pointer;" onclick="openImage($(this))" />
                     <!-- </a> -->
+                        <input id="ft" type="file" accept="image/*" style="display: none;" onchange="ch_img_profile(this)">
                 </div>
                 <div class="content-area">
                     <h3 id="profile_nama"></h3>
