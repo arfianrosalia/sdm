@@ -31,7 +31,12 @@ class Pegawai extends CI_Controller {
 		$var['content'] = 'view-pegawai';
 		$var['js'] = 'js-pegawai';
 
+		$var['ls_pegawaiTraining'] = $this->model_pegawai->getListPegawaiTraining();
+		$var['ls_pegawaiTetap'] = $this->model_pegawai->getListPegawaiTetap();
+		$var['ls_pegawaiKontrak'] = $this->model_pegawai->getListPegawaiKontrak();
 		$var['ls_pegawai'] = $this->model_pegawai->getListPegawai();
+
+
 		$var['ls_gelar'] = $this->model_pegawai->getMaster('gelar');
 		$var['ls_pendidikan'] = $this->model_pegawai->getMaster('pendidikan');
 		$var['ls_agama'] = $this->model_pegawai->getMaster('agama');

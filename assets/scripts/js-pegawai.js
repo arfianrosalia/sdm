@@ -1,4 +1,8 @@
-$('#tb_Pegawai').DataTable();
+$('#tb_Training').DataTable();
+$('#tb_PegawaiTetap').DataTable();
+$('#tb_Kontrak').DataTable();
+$('#tb_AllPegawai').DataTable();
+
 $('.datetimepicker').bootstrapMaterialDatePicker({
     format: 'DD MMMM YYYY',
     clearButton: true,

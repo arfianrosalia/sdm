@@ -4,10 +4,11 @@
     <h2>LIST PEGAWAI</h2>
 </div>
 
+
 <div class="row clearfix" id="list_pegawai" style="display: none;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
-            <div class="header">
+            <!-- <div class="header">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
                         <h2>LIST PEGAWAI</h2>
@@ -16,61 +17,218 @@
                         <div class="waves-effect"><i class="material-icons">refresh</i></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="body">
-
-                <div class="row clearfix">
-                    <div class="col-xs-12 col-sm-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home_with_icon_title" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">school</i> TRAINING
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#profile_with_icon_title" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">person</i> PEGAWAI TETAP
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#messages_with_icon_title" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">sentiment_satisfied</i> KONTRAK
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#settings_with_icon_title" data-toggle="tab" aria-expanded="true">
+                            <i class="material-icons">group</i> ALL KARYAWAN
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
                         <a href="#add_person">
                             <button class="btn waves-effect bg-green" onclick="formAdd()">
                                 <i class="material-icons">person_add</i>&nbsp;Tambah Karyawan
                             </button>
                         </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home_with_icon_title">
+                        <br>
+                        
+
+                        <table class="table table-bordered table-responsive table-hover" id="tb_Training">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    
+                                    <th>Nama</th>
+                                    <th>Department&nbsp;&&nbsp;Jabatan</th>
+                                    <th>Wilayah&nbsp;Agen</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($ls_pegawaiTraining)){ $no=1; ?>
+                                    <?php foreach ($ls_pegawaiTraining as $key => $value) { ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><b><?php echo $value->nik; ?></b></td>
+                                            
+                                            <td width="200px"><?php echo $value->nama_lengkap; ?></td>
+                                            <td width="250px">
+                                                <?php echo $value->nama_department; ?><br>
+                                                <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
+                                            </td>
+                                            <td><?php echo $value->nama_agen; ?></td>
+                                            <td width="150px"><?php echo $value->nama_status; ?></td>
+                                            <td width="100px">
+                                                <a href="#detail">
+                                                    <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php $no++; } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
+                        <br>
+                        
+
+                        <table class="table table-bordered table-responsive table-hover" id="tb_PegawaiTetap">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    
+                                    <th>Nama</th>
+                                    <th>Department&nbsp;&&nbsp;Jabatan</th>
+                                    <th>Wilayah&nbsp;Agen</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($ls_pegawaiTetap)){ $no=1; ?>
+                                    <?php foreach ($ls_pegawaiTetap as $key => $value) { ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><b><?php echo $value->nik; ?></b></td>
+                                            
+                                            <td width="200px"><?php echo $value->nama_lengkap; ?></td>
+                                            <td width="250px">
+                                                <?php echo $value->nama_department; ?><br>
+                                                <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
+                                            </td>
+                                            <td><?php echo $value->nama_agen; ?></td>
+                                            <td width="150px"><?php echo $value->nama_status; ?></td>
+                                            <td width="100px">
+                                                <a href="#detail">
+                                                    <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php $no++; } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="messages_with_icon_title">
+                        <br>
+                        
+
+                        <table class="table table-bordered table-responsive table-hover" id="tb_Kontrak">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    
+                                    <th>Nama</th>
+                                    <th>Department&nbsp;&&nbsp;Jabatan</th>
+                                    <th>Wilayah&nbsp;Agen</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($ls_pegawaiKontrak)){ $no=1; ?>
+                                    <?php foreach ($ls_pegawaiKontrak as $key => $value) { ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><b><?php echo $value->nik; ?></b></td>
+                                            
+                                            <td width="200px"><?php echo $value->nama_lengkap; ?></td>
+                                            <td width="250px">
+                                                <?php echo $value->nama_department; ?><br>
+                                                <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
+                                            </td>
+                                            <td><?php echo $value->nama_agen; ?></td>
+                                            <td width="150px"><?php echo $value->nama_status; ?></td>
+                                            <td width="100px">
+                                                <a href="#detail">
+                                                    <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php $no++; } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="settings_with_icon_title">
+                        <br>
+                        
+
+                        <table class="table table-bordered table-responsive table-hover" id="tb_AllPegawai">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    
+                                    <th>Nama</th>
+                                    <th>Department&nbsp;&&nbsp;Jabatan</th>
+                                    <th>Wilayah&nbsp;Agen</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($ls_pegawai)){ $no=1; ?>
+                                    <?php foreach ($ls_pegawai as $key => $value) { ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><b><?php echo $value->nik; ?></b></td>
+                                            
+                                            <td width="200px"><?php echo $value->nama_lengkap; ?></td>
+                                            <td width="250px">
+                                                <?php echo $value->nama_department; ?><br>
+                                                <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
+                                            </td>
+                                            <td><?php echo $value->nama_agen; ?></td>
+                                            <td width="150px"><?php echo $value->nama_status; ?></td>
+                                            <td width="100px">
+                                                <a href="#detail">
+                                                    <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php $no++; } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-<!-- or even simpler -->
 
-
-
-                <table class="table table-bordered table-responsive table-hover" id="tb_Pegawai">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>NIK</th>
-                            
-                            <th>Nama</th>
-                            <th>Department&nbsp;&&nbsp;Jabatan</th>
-                            <th>Wilayah&nbsp;Agen</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if(!empty($ls_pegawai)){ $no=1; ?>
-                            <?php foreach ($ls_pegawai as $key => $value) { ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><b><?php echo $value->nik; ?></b></td>
-                                    
-                                    <td width="200px"><?php echo $value->nama_lengkap; ?></td>
-                                    <td width="250px">
-                                        <?php echo $value->nama_department; ?><br>
-                                        <small style="color:green; font-weight: bold;"><?php echo $value->nama_jabatan; ?></small>
-                                    </td>
-                                    <td><?php echo $value->nama_agen; ?></td>
-                                    <td width="150px"><?php echo $value->nama_status; ?></td>
-                                    <td width="100px">
-                                        <a href="#detail">
-                                            <button class="btn bg-orange waves-effect btn-xs" onclick="detail('<?php echo $value->id_token; ?>')">
-                                                <i class="material-icons">create</i>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php $no++; } ?>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                
             </div>
         </div>
     </div>
@@ -254,21 +412,23 @@
                     </div>
 
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label for="email_address">Gelar</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick" col="c_gelar" name="gelar">
-                                        <option disabled="disabled" selected="selected">-- Pilih Gelar --</option>
-                                        <?php if(!empty($ls_gelar)){ ?>
-                                            <?php foreach ($ls_gelar as $key => $value) { ?>
-                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_gelar; ?></option>
+                        <?php if(1+1==1){ ?>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="email_address">Gelar</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" col="c_gelar" name="gelar">
+                                            <option disabled="disabled" selected="selected">-- Pilih Gelar --</option>
+                                            <?php if(!empty($ls_gelar)){ ?>
+                                                <?php foreach ($ls_gelar as $key => $value) { ?>
+                                                    <option value="<?php echo $value->id; ?>"><?php echo $value->nama_gelar; ?></option>
+                                                <?php } ?>
                                             <?php } ?>
-                                        <?php } ?>
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
 
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label for="email_address">Tanggal Lahir</label>
@@ -438,24 +598,63 @@
             <div class="body">
                 <form>
                     <div class="row clearfix">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group form-float">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Status Pribadi</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick design-select" col="c_status_pribadi" name="status_pribadi">
+                                        <option disabled="disabled" selected="selected">-- Pilih Status Pribadi --</option>
+                                        <?php if(!empty($ls_status_pribadi)){ ?>
+                                            <?php foreach ($ls_status_pribadi as $key => $value) { ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_pribadi; ?></option>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="email_address">Nama Suami / Istri</label>
+                            <div class="form-group">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" col="c_nama_pasangan" name="nama_pasangan">
-                                    <label class="form-label">Nama Suami / Istri</label>
+                                    <input type="text" class="form-control" col="c_nama_pasangan" name="nama_pasangan" placeholder="Masukkan nama pasangan">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group form-float">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="">Jumlah Anak</label>
+                            <div class="form-group">
                                 <div class="form-line ">
-                                    <input type="text" class="form-control" col="c_jumlah_anak" name="jumlah_anak">
-                                    <label class="form-label">Jumlah Anak</label>
+                                    <input type="number" class="form-control" col="c_jumlah_anak" name="jumlah_anak" placeholder="Masukkan jumlah anak">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="">Nomor KK (Kartu Keluarga)</label>
+                            <div class="form-group">
+                                <div class="form-line ">
+                                    <input type="number" class="form-control" col="c_no_kk" name="no_kk" placeholder="Masukkan Nomor KK">
                                 </div>
                             </div>
                         </div>
                     </div> 
+                    <label style="color: green;">Domisili</label>
+                    <form>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label for="email_address">Alamat Lengkap</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <textarea class="form-control" col="c_alamat" name="alamat"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </form>
             </div>
         </div>
@@ -504,19 +703,7 @@
                     </div>
                 </form>
                 <hr>
-                <label style="color: green;">Domisili</label>
-                <form>
-                    <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <label for="email_address">Alamat Lengkap</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <textarea class="form-control" col="c_alamat" name="alamat"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                
             </div>
         </div>
 
@@ -550,22 +737,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label for="email_address">Status Pribadi</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick design-select" col="c_status_pribadi" name="status_pribadi">
-                                        <option disabled="disabled" selected="selected">-- Pilih Status Pribadi --</option>
-                                        <?php if(!empty($ls_status_pribadi)){ ?>
-                                            <?php foreach ($ls_status_pribadi as $key => $value) { ?>
-                                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama_status_pribadi; ?></option>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
+                        
+                        <?php if(1+1==1){ ?>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label for="email_address">Nama Atasan</label>
                             <div class="form-group">
@@ -581,6 +754,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
 
                 </form>
