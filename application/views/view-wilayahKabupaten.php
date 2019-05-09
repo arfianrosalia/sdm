@@ -20,8 +20,8 @@
                     <thead>
                         <tr>
                             <th width="20px" align="center">No.</th>
-                            <th>ID&nbsp;Provinsi</th>
-                            <th>Nama&nbsp;Provinsi</th>
+                            <th>ID&nbsp;Kabupaten</th>
+                            <th>Nama&nbsp;kabupaten</th>
                         </tr>
                     </thead>
                     <tbody>

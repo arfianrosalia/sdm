@@ -1,4 +1,5 @@
 $('#tb_master').DataTable({
+    responsive: true,
   "initComplete": function(settings, json) {
    $('#tb_master').fadeIn("fast");
   }
@@ -6,38 +7,27 @@ $('#tb_master').DataTable({
 
 
 
-function addAgen(){       
+function addfungsional(){       
 	var form=`				<div class="body">
 							<form class="form-horizontal">
                                 
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA AGEN</label>
+                                        <label for="email_address_2">NAMA FUNGSIONAL</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_agen" placeholder="Masukan Nama Agen" required>
+                                                <input type="text" class="form-control" name="nama_fungsional" placeholder="Masukan Nama Fungsional" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">KOTA</label>
+                                        <label for="email_address_2">KETERANGAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="kota" placeholder="Masukan Kota" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">ALAMAT</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <textarea class="form-control" name="alamat" placeholder="Masukan Alamat" required></textarea>
+                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +38,7 @@ function addAgen(){
 
 
 	$.confirm({
-    title: 'INPUT AGEN',
+    title: 'INPUT FUNGSIONAL',
     columnClass:'col-md-6 col-md-offset-3 ',
     animation: 'scale',
     closeAnimation: 'rotateYR', 
@@ -61,17 +51,16 @@ function addAgen(){
             text: 'Simpan',
             btnClass: 'btn-blue',
             action: function () {
-                var nama = this.$content.find('input[name="nama_agen"]').val();
-                var kota = this.$content.find('input[name="kota"]').val();
-                var alamat = this.$content.find('textarea[name="alamat"]').val();
-                if(nama==''|| ALAMAT==''){
+                var nama = this.$content.find('input[name="nama_fungsional"]').val();
+                var keterangan = this.$content.find('textarea[name="keterangan"]').val();
+                if(nama==''|| keterangan==''){
                     $.alert('Form Belum Diisi lengkap..!');
                     return false;
                 }else{
                     $.ajax({
                         type : 'POST',
-                        url  :  URL+'master/add_agen',
-                        data : {nama : nama , ALAMAT : ALAMAT},
+                        url  :  URL+'master/add_fungsional',
+                        data : {nama : nama , keterangan : keterangan},
                         success: function(data){
                                     $.confirm({
                                             title:'Pesan Sukses',
@@ -87,7 +76,7 @@ function addAgen(){
                                                     text:'CLOSE',
                                                     btnClass:'btn-green waves waves-effect',
                                                     action:function(){
-                                                        
+                                                      window.location.reload();   
                                                     }
                                                 }
                                             }
@@ -128,7 +117,7 @@ function hapus(id,el){
                     text:'HAPUS',
                     btnClass:'btn-red waves waves-effect',
                     action:function(){
-                        $.post(URL+'master/delete_agen',{id:id}).done(function(data){
+                        $.post(URL+'master/delete_fungsional',{id:id}).done(function(data){
                             if (data=='1') {
                                 el.closest('tr').remove();
                                 $('#tb_master').DataTable().draw('false');
@@ -145,7 +134,7 @@ function hapus(id,el){
                                                     text:'CLOSE',
                                                     btnClass:'btn-green waves waves-effect',
                                                     action:function(){
-                                                        
+                                                       window.location.reload();  
                                                     }
                                                 }
                                             }
@@ -160,8 +149,7 @@ function hapus(id,el){
                 close:{
                     text:'CLOSE',
                     btnClass:'btn-default waves waves-effect',
-                    action:function(){
-                        
+                    action:function(){   
                     }
                 }
             }
@@ -175,7 +163,7 @@ function edit(id,el){
                  title:'Edit Data',
                   content:function(){
                     var self = this;
-                    return $.post(URL+'master/get_idagen/',{id:id}).done(function(data){
+                    return $.post(URL+'master/get_idfungsional/',{id:id}).done(function(data){
                         try{
                             var res = JSON.parse(data);
                             var form = `
@@ -188,27 +176,17 @@ function edit(id,el){
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_agen" value="`+res.nama_agen+`">
+                                                <input type="text" class="form-control" name="nama_fungsional" value="`+res.nama_fungsional+`">
                                             </div>
                                         </div>
-                                    </div>
-                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">KOTA</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="kota" value="`+res.kota+`">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">ALAMAT</label>
+                                        <label for="email_address_2">KETERANGAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea class="form-control" name="alamat">`+res.alamat+`</textarea>
+                                                <textarea class="form-control" name="keterangan">`+res.keterangan+`</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -236,17 +214,16 @@ function edit(id,el){
                             btnClass: 'btn-blue',
                             action: function () {
                                 var id = this.$content.find('input[name="id"]').val();
-                                var nama = this.$content.find('input[name="nama_agen"]').val();
-                                var kota = this.$content.find('input[name="kota"]').val();
-                                var alamat = this.$content.find('textarea[name="alamat"]').val();
-                                if(nama==''|| ALAMAT==''){
+                                var nama = this.$content.find('input[name="nama_fungsional"]').val();
+                                var keterangan = this.$content.find('textarea[name="keterangan"]').val();
+                                if(nama==''|| keterangan==''){
                                    $.alert('Form Belum Diisi lengkap..!');
                                    return false;
                             }else{
                                 $.ajax({
                                  type : 'POST',
-                                 url  :  URL+'master/update_agen',
-                                  data : {id : id ,nama : nama , ALAMAT : ALAMAT},
+                                 url  :  URL+'master/update_fungsional',
+                                  data : {id : id ,nama : nama , keterangan : keterangan},
                                   success: function(data){
                                     if (data=='true') {
                                            
@@ -283,7 +260,7 @@ function edit(id,el){
                         text:'CLOSE',
                           btnClass:'btn-default waves waves-effect',
                           action:function(){
-                                                        
+                                                       
                           }
                       }
                 }
@@ -291,4 +268,3 @@ function edit(id,el){
     
 
 }
-js-masterFungsional
