@@ -20,8 +20,8 @@
                     <thead>
                         <tr>
                             <th width="20px" align="center">No.</th>
-                            <th>ID&nbsp;Kecamatan</th>
-                            <th>Nama&nbsp;Kecamatan</th>
+                            <th>ID&nbsp;Kelurahan</th>
+                            <th>Nama&nbsp;Kelurahan</th>
                            
                         </tr>
                     </thead>

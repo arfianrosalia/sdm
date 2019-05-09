@@ -134,38 +134,7 @@ class Master extends CI_Controller {
 		echo json_encode($data);
 		
 	}
-	public function master_GelarNama(){
-		$this->load->model('model_master');
-		$var['js'] ='js-masterGelarnama';
-		$var['content'] = 'view-GelarNama';
-		$var['ls_GelarNama'] = $this->model_master->getListGelarNama();
-		$this->load->view('view-index',$var);
-	}
-	public function add_GelarNama(){
-		$this->load->model('model_master');
-		$data = $this->model_master-> add_GelarNama();
-		echo json_encode($data);
-	}
-	public function delete_GelarNama(){
-		$this->load->model('model_master');
-		$var = $this->model_master->delete_GelarNama($_POST['id']);
-		if ($var) {
-			echo "1";
-		}else{
-			echo "0";
-		}
-	}
-	public function get_idGelarNama(){
-		$this->load->model('model_master');
-		$data = $this->model_master->get_idGelarNama($_POST['id']);
-		echo json_encode($data);
-	}
-	public function update_GelarNama(){
-		$this->load->model('model_master');
-		$data = $this->model_master->update_GelarNama();
-		echo json_encode($data);
-		
-	}
+	
 	public function master_pendidikan(){
 		$this->load->model('model_master');
 		$var['js'] = 'js-master';
@@ -233,14 +202,39 @@ class Master extends CI_Controller {
 	}
 	public function master_StatusPribadi(){
 		$this->load->model('model_master');
-		$var['js'] = 'js-master';
+		$var['js'] = 'js-masterStatuspribadi';
 		$var['content'] = 'view-statusPribadi';
 		$var['ls_statusPribadi'] = $this->model_master->getListStatusPribadi();
 		$this->load->view('view-index',$var);
 	}
+	public function add_SetatusPribadi(){
+		$this->load->model('model_master');
+		$data = $this->model_master-> add_SetatusPribadi();
+		echo json_encode($data);
+	}
+	public function delete_SetatusPribadi(){
+		$this->load->model('model_master');
+		$var = $this->model_master->delete_SetatusPribadi($_POST['id']);
+		if ($var) {
+			echo "1";
+		}else{
+			echo "0";
+		}
+	}
+	public function get_idSetatusPribadi(){
+		$this->load->model('model_master');
+		$data = $this->model_master->get_idSetatusPribadi($_POST['id']);
+		echo json_encode($data);
+	}
+	public function update_SetatusPribadi(){
+		$this->load->model('model_master');
+		$data = $this->model_master->update_SetatusPribadi();
+		echo json_encode($data);
+		
+	}
 	public function master_fungsional(){
 		$this->load->model('model_master');
-		$var['js'] = 'js-master';
+		$var['js'] = 'js-masterFungsional';
 		$var['content'] = 'view-fungsional';
 		$var['ls_fungsional'] = $this->model_master->getListFungsional();
 		$this->load->view('view-index',$var);

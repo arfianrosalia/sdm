@@ -19,7 +19,7 @@ function addDeparment(){
                                                 <input type="text" class="form-control" name="nama_department" placeholder="Masukan Nama Department" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">KETERANGAN</label>
                                     </div>
@@ -179,7 +179,7 @@ function edit(id,el){
                                                 <input type="text" class="form-control" name="nama_department" value="`+res.nama_department+`">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">KETERANGAN</label>
                                     </div>

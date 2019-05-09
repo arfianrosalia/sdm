@@ -29,9 +29,6 @@
             <a href="<?php echo base_url('master/master_StatusKaryawan'); ?>">Status Karyawan</a>
         </li>
         <li>
-            <a href="<?php echo base_url('master/master_GelarNama'); ?>">Gelar Nama</a>
-        </li>
-        <li>
             <a href="<?php echo base_url('master/master_pendidikan'); ?>">Pendidikan</a>
         </li>
           <li>

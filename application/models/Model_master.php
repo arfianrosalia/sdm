@@ -157,6 +157,39 @@
 			$data=$this->db->get_where('master_status_pribadi',array('is_delete'=>0));
 			return $data->result();
 		}
+		public function add_SetatusPribadi(){
+			$data = array(
+				'nama_status_pribadi' => $this->input->post('nama') ,
+				'keterangan' => $this->input->post('keterangan'),
+				 );
+			$result = $this->db->insert('master_status_pribadi',$data);
+			return $result;
+		}
+		public function delete_SetatusPribadi($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_status_pribadi');
+			$var = $this->db->where('id',$id)->update('master_status_pribadi',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idSetatusPribadi($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_status_pribadi');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function update_SetatusPribadi(){
+			$data = array(
+			'nama_status_pribadi' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_status_pribadi',$data);
+			return $result;
+		}
 		public function getListAgen(){
 			$data=$this->db->get_where('master_agen',array('is_delete'=>0));
 			return $data->result();
@@ -198,41 +231,37 @@
 			$data=$this->db->get_where('master_fungsional',array('is_delete'=>0));
 			return $data->result();
 		}
-		public function getListGelarNama(){
-			$data=$this->db->get_where('master_gelar',array('is_delete'=>0));
-			return $data->result();
-		}
-		public function add_GelarNama(){
+		public function add_Fungsional(){
 			$data = array(
-				'nama_GelarNama' => $this->input->post('nama') ,
+				'nama_fungsional' => $this->input->post('nama') ,
 				'keterangan' => $this->input->post('keterangan'),
 				 );
-			$result = $this->db->insert('master_agen',$data);
+			$result = $this->db->insert('master_fungsional',$data);
 			return $result;
 		}
-		public function delete_GelarNama($id=null){
-			$this->db->select('id')->where('id',$id)->get('master_agen');
-			$var = $this->db->where('id',$id)->update('master_agen',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+		public function delete_Fungsional($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_fungsional');
+			$var = $this->db->where('id',$id)->update('master_fungsional',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
 			if($var){
 				return true;
 			}else{
 				return null;
 			}
 		}
-		public function get_idGelarNama($id=null){
-			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_agen');
+		public function get_idFungsional($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_fungsional');
 			if($res->num_rows()>0){
 				return $res->row();
 			}else{
 				return null;
 			}
 		}
-		public function update_GelarNama(){
+		public function update_Fungsional(){
 			$data = array(
-			'nama_GelarNama' => $this->input->post('nama'),
+			'nama_fungsional' => $this->input->post('nama'),
 			'keterangan' => $this->input->post('keterangan')
 			);
-			$result = $this->db->where('id',$this->input->post('id'))->update('master_agen',$data);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_fungsional',$data);
 			return $result;
 		}
 		public function getListWilayahDistricts(){
