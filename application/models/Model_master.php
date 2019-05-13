@@ -191,7 +191,7 @@
 			return $result;
 		}
 		public function getListAgen(){
-			$data=$this->db->get_where('master_agen',array('is_delete'=>0));
+			$data=$this->db->get_where('master_lokasi_agen',array('is_delete'=>0));
 			return $data->result();
 		}
 		public function add_agen(){
@@ -199,12 +199,12 @@
 				'nama_agen' => $this->input->post('nama') ,
 				'keterangan' => $this->input->post('keterangan'),
 				 );
-			$result = $this->db->insert('master_agen',$data);
+			$result = $this->db->insert('master_lokasi_agen',$data);
 			return $result;
 		}
 		public function delete_agen($id=null){
-			$this->db->select('id')->where('id',$id)->get('master_agen');
-			$var = $this->db->where('id',$id)->update('master_agen',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			$this->db->select('id')->where('id',$id)->get('master_lokasi_agen');
+			$var = $this->db->where('id',$id)->update('master_lokasi_agen',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
 			if($var){
 				return true;
 			}else{
@@ -212,7 +212,7 @@
 			}
 		}
 		public function get_idagen($id=null){
-			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_agen');
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_lokasi_agen');
 			if($res->num_rows()>0){
 				return $res->row();
 			}else{
@@ -224,7 +224,7 @@
 			'nama_agen' => $this->input->post('nama'),
 			'keterangan' => $this->input->post('keterangan')
 			);
-			$result = $this->db->where('id',$this->input->post('id'))->update('master_agen',$data);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_lokasi_agen',$data);
 			return $result;
 		}
 			public function getListFungsional(){
