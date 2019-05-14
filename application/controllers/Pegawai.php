@@ -42,9 +42,7 @@ class Pegawai extends CI_Controller {
 		$var['ls_status_karyawan'] = $this->model_pegawai->getMaster('status_karyawan');
 		$var['ls_status_pribadi'] = $this->model_pegawai->getMaster('status_pribadi');
 		$var['ls_atasan'] = $this->model_pegawai->getAtasan();
-
-
-		$var['ls_provinsi'] = $this->model_pegawai->getProvinsi();
+	    $var['ls_provinsi'] = $this->model_pegawai->getProvinsi();
 		// $var['ls_kota'] = $this->model_pegawai->getKabupaten();
 		// $var['ls_kecamatan'] = $this->model_pegawai->getKecamatan();
 		// $var['ls_kelurahan'] = $this->model_pegawai->getKelurahan();

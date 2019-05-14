@@ -6,17 +6,17 @@ $('#tb_master').DataTable({
 
 
 
-function addPendidikan(){       
-    var form=`              <div class="body">
-                            <form class="form-horizontal">
+function addJurusan(){       
+	var form=`				<div class="body">
+							<form class="form-horizontal">
                                 
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA PENDIDIKAN</label>
+                                        <label for="email_address_2">NAMA JURUSAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_pendidikan" placeholder="Masukan Nama Pendidikan" required>
+                                                <input type="text" class="form-control" name="nama_jurusan" placeholder="Masukan Nama jurusan" required>
                                             </div>
                                         </div>
                                     </div><br><br><br>
@@ -33,11 +33,11 @@ function addPendidikan(){
                                 
                             </form>
                             </div>
-                `;
+				`;
 
 
-    $.confirm({
-    title: 'INPUT PIEDIDIAKAN',
+	$.confirm({
+    title: 'INPUT JURUSAN',
     columnClass:'col-md-6 col-md-offset-3 ',
     animation: 'scale',
     closeAnimation: 'rotateYR', 
@@ -50,7 +50,7 @@ function addPendidikan(){
             text: 'Simpan',
             btnClass: 'btn-blue',
             action: function () {
-                var nama = this.$content.find('input[name="nama_pendidikan"]').val();
+                var nama = this.$content.find('input[name="nama_jurusan"]').val();
                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
                 if(nama==''|| keterangan==''){
                     $.alert('Form Belum Diisi lengkap..!');
@@ -58,7 +58,7 @@ function addPendidikan(){
                 }else{
                     $.ajax({
                         type : 'POST',
-                        url  :  URL+'master/add_pendidikan',
+                        url  :  URL+'master/add_jurusan',
                         data : {nama : nama , keterangan : keterangan},
                         success: function(data){
                                     $.confirm({
@@ -116,7 +116,7 @@ function hapus(id,el){
                     text:'HAPUS',
                     btnClass:'btn-red waves waves-effect',
                     action:function(){
-                        $.post(URL+'master/delete_pendidikan',{id:id}).done(function(data){
+                        $.post(URL+'master/delete_jurusan',{id:id}).done(function(data){
                             if (data=='1') {
                                 el.closest('tr').remove();
                                 $('#tb_master').DataTable().draw('false');
@@ -163,7 +163,7 @@ function edit(id,el){
                  title:'Edit Data',
                   content:function(){
                     var self = this;
-                    return $.post(URL+'master/get_idPendidikan/',{id:id}).done(function(data){
+                    return $.post(URL+'master/get_idjurusan/',{id:id}).done(function(data){
                         try{
                             var res = JSON.parse(data);
                             var form = `
@@ -171,12 +171,12 @@ function edit(id,el){
                             <form class="form-horizontal">
                                 <input type="hidden" name="id" value="`+id+`">
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA PENDIDIKAN</label>
+                                        <label for="email_address_2">NAMA JURUSAN</label>
                                     </div>
                                     <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_pendidikan" value="`+res.nama_pendidikan+`">
+                                                <input type="text" class="form-control" name="nama_jurusan" value="`+res.nama_jurusan+`">
                                             </div>
                                         </div>
                                     </div><br><br><br>
@@ -214,7 +214,7 @@ function edit(id,el){
                             btnClass: 'btn-blue',
                             action: function () {
                                 var id = this.$content.find('input[name="id"]').val();
-                                var nama = this.$content.find('input[name="nama_pendidikan"]').val();
+                                var nama = this.$content.find('input[name="nama_jurusan"]').val();
                                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
                                 if(nama==''|| keterangan==''){
                                    $.alert('Form Belum Diisi lengkap..!');
@@ -222,7 +222,7 @@ function edit(id,el){
                             }else{
                                 $.ajax({
                                  type : 'POST',
-                                 url  :  URL+'master/update_pendidikan',
+                                 url  :  URL+'master/update_jurusan',
                                   data : {id : id ,nama : nama , keterangan : keterangan},
                                   success: function(data){
                                     if (data=='true') {

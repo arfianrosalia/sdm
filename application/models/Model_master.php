@@ -116,6 +116,39 @@
 			$data=$this->db->get_where('master_pendidikan',array('is_delete'=>0));
 			 return $data->result();
 		}
+		public function add_pendidikan(){
+			$data = array(
+				'nama_pendidikan' => $this->input->post('nama') ,
+				'keterangan' => $this->input->post('keterangan'),
+				 );
+			$result = $this->db->insert('master_pendidikan',$data);
+			return $result;
+		}
+		public function delete_pendidikan($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_pendidikan');
+			$var = $this->db->where('id',$id)->update('master_pendidikan',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idPendidikan($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_pendidikan');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function update_pendidikan(){
+			$data = array(
+			'nama_pendidikan' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_pendidikan',$data);
+			return $result;
+		}
 		public function getListStatusKaryawan(){
 			$data=$this->db->get_where('master_status_karyawan',array('is_delete'=>0));
 			return $data->result();
@@ -191,7 +224,7 @@
 			return $result;
 		}
 		public function getListAgen(){
-			$data=$this->db->get_where('master_agen',array('is_delete'=>0));
+			$data=$this->db->get_where('master_lokasi_agen',array('is_delete'=>0));
 			return $data->result();
 		}
 		public function add_agen(){
@@ -199,12 +232,12 @@
 				'nama_agen' => $this->input->post('nama') ,
 				'keterangan' => $this->input->post('keterangan'),
 				 );
-			$result = $this->db->insert('master_agen',$data);
+			$result = $this->db->insert('master_lokasi_agen',$data);
 			return $result;
 		}
 		public function delete_agen($id=null){
-			$this->db->select('id')->where('id',$id)->get('master_agen');
-			$var = $this->db->where('id',$id)->update('master_agen',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			$this->db->select('id')->where('id',$id)->get('master_lokasi_agen');
+			$var = $this->db->where('id',$id)->update('master_lokasi_agen',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
 			if($var){
 				return true;
 			}else{
@@ -212,7 +245,7 @@
 			}
 		}
 		public function get_idagen($id=null){
-			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_agen');
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_lokasi_agen');
 			if($res->num_rows()>0){
 				return $res->row();
 			}else{
@@ -224,7 +257,7 @@
 			'nama_agen' => $this->input->post('nama'),
 			'keterangan' => $this->input->post('keterangan')
 			);
-			$result = $this->db->where('id',$this->input->post('id'))->update('master_agen',$data);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_lokasi_agen',$data);
 			return $result;
 		}
 			public function getListFungsional(){
@@ -264,6 +297,44 @@
 			$result = $this->db->where('id',$this->input->post('id'))->update('master_fungsional',$data);
 			return $result;
 		}
+		public function getListjurusan(){
+			$data=$this->db->get_where('master_jurusan',array('is_delete'=>0));
+			return $data->result();
+		}
+		public function add_jurusan(){
+			$data = array(
+				'nama_jurusan' => $this->input->post('nama') ,
+				'keterangan' => $this->input->post('keterangan'),
+				 );
+			$result = $this->db->insert('master_jurusan',$data);
+			return $result;
+		}
+		public function delete_jurusan($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_jurusan');
+			$var = $this->db->where('id',$id)->update('master_jurusan',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idjurusan($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_jurusan');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function update_jurusan(){
+			$data = array(
+			'nama_jurusan' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_jurusan',$data);
+			return $result;
+		}
+
 		public function getListWilayahDistricts(){
 			
 			$this->db->order_by("id" ,"desc");

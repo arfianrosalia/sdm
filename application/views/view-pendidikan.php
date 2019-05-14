@@ -9,7 +9,7 @@
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
                         <h2>LIST MASTER PENDIDIKAN</h2><br>
-                         <button type="button" class="btn btn-success waves-effect">
+                         <button type="button" class="btn btn-success waves-effect" onclick="addPendidikan()">
                                 <i class="material-icons">queue</i>
                                 <span>Tambah Data</span>
                          </button>

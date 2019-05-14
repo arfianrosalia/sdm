@@ -22,7 +22,7 @@
 					->join('master_jabatan','master_jabatan.id=p.jabatan','left')
 					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
-					->join('master_agen','master_agen.id=p.lokasi_agen','left')
+					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
 					->order_by('p.id','desc')
 					->get();
 			if($load->num_rows()>0){
@@ -79,7 +79,7 @@
 						master_status_karyawan.id as status_karyawan,
 						master_status_pribadi.id as status_pribadi,
 						p.no_telepon,
-						master_agen.id as nama_agen,
+						master_lokasi_agen.id as nama_agen,
 						wilayah_regencies.province_id as provinsi_kelahiran,
 						wilayah_regencies.id as kabupaten_kelahiran
 					';
@@ -94,7 +94,7 @@
 					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
 					->join('master_status_pribadi','master_status_pribadi.id=p.status_pribadi','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
-					->join('master_agen','master_agen.id=p.lokasi_agen','left')
+					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
 					->join('wilayah_regencies','wilayah_regencies.id=p.kota_kelahiran','left')
 					->where('p.id_token',$id)
 					->get();

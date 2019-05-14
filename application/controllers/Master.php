@@ -68,6 +68,40 @@ class Master extends CI_Controller {
 		echo json_encode($data);
 		
 	}
+	public function master_jurusan(){
+		$this->load->model('model_master');
+		$var['js'] = 'js-masterJurusan';
+		$var['content'] = 'view-jurusan';
+		$var['ls_jurusan'] = $this->model_master->getListjurusan();
+		$this->load->view('view-index',$var);
+	}
+	public function delete_jurusan(){
+		$this->load->model('model_master');
+		$var = $this->model_master->delete_jurusan($_POST['id']);
+		if ($var) {
+			echo "1";
+		}else{
+			echo "0";
+		}
+	}
+	
+	public function add_jurusan(){
+		$this->load->model('model_master');
+		$data = $this->model_master-> add_jurusan();
+		echo json_encode($data);
+	}
+	
+	public function get_idJurusan(){
+		$this->load->model('model_master');
+		$data = $this->model_master->get_idjurusan($_POST['id']);
+		echo json_encode($data);
+	}
+	public function update_jurusan(){
+		$this->load->model('model_master');
+		$data = $this->model_master->update_jurusan();
+		echo json_encode($data);
+		
+	}
 	public function master_jabatan(){
 		$this->load->model('model_master');
 		$var['js'] = 'js-masterJabatan';
@@ -137,7 +171,7 @@ class Master extends CI_Controller {
 	
 	public function master_pendidikan(){
 		$this->load->model('model_master');
-		$var['js'] = 'js-master';
+		$var['js'] = 'js-masterPendidikan';
 		$var['content'] = 'view-pendidikan';
 		$var['ls_pendidikan'] = $this->model_master->getListPendidikan();
 		$this->load->view('view-index',$var);
@@ -156,7 +190,7 @@ class Master extends CI_Controller {
 			echo "0";
 		}
 	}
-	public function get_idpendidikan(){
+	public function get_idPendidikan(){
 		$this->load->model('model_master');
 		$data = $this->model_master->get_idpendidikan($_POST['id']);
 		echo json_encode($data);

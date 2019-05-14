@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>MASTER SETATUS PRIBADI</h2>
+    <h2>MASTER JURUSAN</h2>
 </div>
 
 <div class="row clearfix">
@@ -8,8 +8,8 @@
             <div class="header">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
-                        <h2>LIST STATUS PRIBADI</h2><br>
-                        <button type="button" class="btn btn-success waves-effect" onclick="addStatusPribadi()">
+                        <h2>LIST JURUSAN</h2><br>
+                        <button type="button" class="btn btn-success waves-effect" onclick="addJurusan()">
                                 <i class="material-icons">queue</i>
                                 <span>Tambah Data</span>
                          </button>
@@ -23,26 +23,26 @@
                 <table class="table table-bordered table-responsive table-hover" id="tb_master">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>ID</th>
-                            <th>Nama Status Pribadi</th>
-                            <th>Katerangan</th>
-                            <th>Action</th>
+                            <th width="20px">No.</th>
+                            <th width="20px">ID&nbsp;JURUSAN</th>
+                            <th width="190px">Nama&nbsp;JURUSAN</th>
+                            <th>Keterangan</th>
+                            <th width="20px">Action</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
-                        <?php  if(!empty('ls_statusPribadi')){
-                            $no=1;
-                            foreach ($ls_statusPribadi as $key => $value){
-                         ?>
+                         <?php if(!empty($ls_jurusan)){ $no=1; ?>
+                            <?php foreach ($ls_jurusan as $key => $value) { ?>
+              
                         <tr>
-                            <td  align="center"><?php echo $no;?></td>
-                            <td  align="center"><?php echo $value->id;?></td>
-                            <td><?php echo $value->nama_status_pribadi;?></td>
+                            <td><?php echo $no;?></td>
+                            <td><?php echo $value->id;?></td>
+                            <td><?php echo $value->nama_jurusan;?></td>
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">
                             
-                               <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
+                                <button type="button" class="btn btn-warning waves-effect btn-xs" onclick="edit('<?php echo $value->id?>',$(this))"  >
                                     <span class="fa fa-pen"></span>
                                 </button>
                                 <button type="button" class="btn btn-danger waves-effect btn-xs" onclick="hapus(`<?php echo $value->id;?>`,$(this))">
@@ -50,13 +50,12 @@
                                 </button>
 
                             </td>
-                        </tr>                   
                         </tr>
-                        <?php 
-                        $no++; 
-                        }
-                    }
-                        ?>
+
+                        
+                        </tr>
+                        <?php $no++; }
+                        } ?>
                     </tbody>
                 </table>
             </div>
