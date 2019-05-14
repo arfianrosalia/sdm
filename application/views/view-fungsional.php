@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama&nbsp;Fungsional</th>
                             <th>Keterangan</th>
                             <th>Action</th>
@@ -36,7 +35,6 @@
                             foreach ($ls_fungsional as $key => $value){?>
                         <tr>
                             <td align="center"><?php echo $no;?></td>
-                            <td align="center"><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_fungsional;?></td>
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">

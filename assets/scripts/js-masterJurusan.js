@@ -6,9 +6,20 @@ $('#tb_master').DataTable({
 
 
 
-function addJurusan(){       
-	var form=`				<div class="body">
-							<form class="form-horizontal">
+
+
+function addJurusan(){
+
+    $.post(URL+'master/get_pendidikan').done(function(data){
+            try{
+                var res = JSON.parse(data);
+                var pendidikan = '<select class="form-control show-tick" id="pendidikan" >';
+                res.forEach( function(item,index){
+                    pendidikan+= `<option value="`+item.id+`">`+ item.nama_pendidikan+`</option>`;
+                });
+                pendidikan+= '</select>';
+                var form=`              <div class="body">
+                            <form class="form-horizontal">
                                 
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">NAMA JURUSAN</label>
@@ -17,6 +28,17 @@ function addJurusan(){
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input type="text" class="form-control" name="nama_jurusan" placeholder="Masukan Nama jurusan" required>
+                                            </div>
+                                        </div>
+                                    </div><br><br><br>
+                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
+                                        <label for="email_address_2">PENDIDIKAN</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                            `+pendidikan+`
+                                                 
                                             </div>
                                         </div>
                                     </div><br><br><br>
@@ -33,10 +55,8 @@ function addJurusan(){
                                 
                             </form>
                             </div>
-				`;
-
-
-	$.confirm({
+                `;
+            $.confirm({
     title: 'INPUT JURUSAN',
     columnClass:'col-md-6 col-md-offset-3 ',
     animation: 'scale',
@@ -52,6 +72,7 @@ function addJurusan(){
             action: function () {
                 var nama = this.$content.find('input[name="nama_jurusan"]').val();
                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
+                var id = this.$content.find('select#pendidikan').val();
                 if(nama==''|| keterangan==''){
                     $.alert('Form Belum Diisi lengkap..!');
                     return false;
@@ -59,7 +80,7 @@ function addJurusan(){
                     $.ajax({
                         type : 'POST',
                         url  :  URL+'master/add_jurusan',
-                        data : {nama : nama , keterangan : keterangan},
+                        data : {nama : nama , keterangan : keterangan, id : id } ,
                         success: function(data){
                                     $.confirm({
                                             title:'Pesan Sukses',
@@ -100,6 +121,19 @@ function addJurusan(){
         });
     }
 });
+                console.log(data);
+            }catch(e){
+                console.log(e);
+            }finally{
+                $('#form_pegawai').fadeIn('fast');
+            }
+        }).fail(function(){
+
+        });       
+	
+
+
+	
 }
 
 function hapus(id,el){

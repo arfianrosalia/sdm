@@ -14,6 +14,42 @@
 						nama_agen
 					';
 			$load = $this->db
+					->where('p.is_delete',0)
+					->where('p.status_karyawan in (12,3,1)')
+					->select($val)
+					// ->select('p.nama_singkat,nama_fungsional,nama_department,p.no_telepon')
+					->from('personalia_pegawai as p')
+					->join('master_fungsional','master_fungsional.id=p.fungsional','left')
+					->join('master_department','master_department.id=p.department','left')
+					->join('master_jabatan','master_jabatan.id=p.jabatan','left')
+					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
+					->join('personalia_pegawai pa','pa.id=p.atasan','left')
+					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
+
+					->order_by('p.id','desc')
+					->get();
+			if($load->num_rows()>0){
+				return $load->result();
+			}else{
+				return null;
+			}
+		}
+
+		public function getListPegawaiTraining(){
+			$val = '	
+						p.id_token,
+						p.nik,
+						p.nama_lengkap,
+						nama_fungsional,
+						nama_jabatan,
+						nama_department,
+						nama_status_karyawan as nama_status,
+						p.no_telepon,
+						nama_agen
+					';
+			$load = $this->db
+					->where('p.is_delete',0)
+					->where('p.status_karyawan',12)
 					->select($val)
 					// ->select('p.nama_singkat,nama_fungsional,nama_department,p.no_telepon')
 					->from('personalia_pegawai as p')
@@ -32,11 +68,79 @@
 			}
 		}
 
+		public function getListPegawaiKontrak(){
+			$val = '	
+						p.id_token,
+						p.nik,
+						p.nama_lengkap,
+						nama_fungsional,
+						nama_jabatan,
+						nama_department,
+						nama_status_karyawan as nama_status,
+						p.no_telepon,
+						nama_agen
+					';
+			$load = $this->db
+					->where('p.is_delete',0)
+					->where('p.status_karyawan',1)
+					->select($val)
+					// ->select('p.nama_singkat,nama_fungsional,nama_department,p.no_telepon')
+					->from('personalia_pegawai as p')
+					->join('master_fungsional','master_fungsional.id=p.fungsional','left')
+					->join('master_department','master_department.id=p.department','left')
+					->join('master_jabatan','master_jabatan.id=p.jabatan','left')
+					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
+					->join('personalia_pegawai pa','pa.id=p.atasan','left')
+					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
+					->order_by('p.id','desc')
+					->get();
+			if($load->num_rows()>0){
+				return $load->result();
+			}else{
+				return null;
+			}
+		}
+
+		public function getListPegawaiTetap(){
+			$val = '	
+						p.id_token,
+						p.nik,
+						p.nama_lengkap,
+						nama_fungsional,
+						nama_jabatan,
+						nama_department,
+						nama_status_karyawan as nama_status,
+						p.no_telepon,
+						nama_agen
+					';
+			$load = $this->db
+					->where('p.is_delete',0)
+					->where('p.status_karyawan',3)
+					->select($val)
+					// ->select('p.nama_singkat,nama_fungsional,nama_department,p.no_telepon')
+					->from('personalia_pegawai as p')
+					->join('master_fungsional','master_fungsional.id=p.fungsional','left')
+					->join('master_department','master_department.id=p.department','left')
+					->join('master_jabatan','master_jabatan.id=p.jabatan','left')
+					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
+					->join('personalia_pegawai pa','pa.id=p.atasan','left')
+					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
+
+					->order_by('p.id','desc')
+					->get();
+			if($load->num_rows()>0){
+				return $load->result();
+			}else{
+				return null;
+			}
+		}
+
 		public function getListPegawaiByID($id=null){
 			$val = '
 						p.id,
 						p.nik,
 						p.no_ktp,
+						p.no_kk,
 						p.nama_lengkap,
 						p.nama_singkat,
 						p.fungsional,

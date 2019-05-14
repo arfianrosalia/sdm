@@ -9,7 +9,7 @@ $('#tb_master').DataTable({
 function addAgen(){       
 	var form=`				<div class="body">
 							<form class="form-horizontal">
-                                
+                                    
                                     <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
                                         <label for="email_address_2">NAMA AGEN</label>
                                     </div>

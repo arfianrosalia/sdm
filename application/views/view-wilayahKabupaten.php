@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th width="20px" align="center">No.</th>
-                            <th>ID&nbsp;Kabupaten</th>
                             <th>Nama&nbsp;kabupaten</th>
                         </tr>
                     </thead>
@@ -32,7 +31,6 @@
                             ?>
                         <tr>
                             <td align="center"><?php echo $no;?></td>
-                            <td><?php echo $value->id;?></td>
                             <td><?php echo $value->name;?></td>
                             
                         </tr>

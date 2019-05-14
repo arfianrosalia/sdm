@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama&nbsp;Pendidikan</th>
                             <th>Keterangan</th>
                             <th>Action</th>
@@ -37,7 +36,6 @@
                             foreach($ls_pendidikan as $key => $value){?>
                         <tr>
                             <td width="20px" align="center"><?php echo $no;?></td>
-                            <td width="20px" align="center"><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_pendidikan;?></td>
                             <td><?php echo $value->keterangan;?></td>
                             <td align="center">

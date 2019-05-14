@@ -190,6 +190,11 @@ class Master extends CI_Controller {
 			echo "0";
 		}
 	}
+	public function get_pendidikan(){
+		$this->load->model('model_master');
+		$data = $this->model_master->get_pendidikan();
+		echo json_encode($data);
+	}
 	public function get_idPendidikan(){
 		$this->load->model('model_master');
 		$data = $this->model_master->get_idpendidikan($_POST['id']);

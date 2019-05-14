@@ -141,6 +141,14 @@
 				return null;
 			}
 		}
+		public function get_pendidikan(){
+			$res = $this->db->get('master_pendidikan');
+			if($res->num_rows()>0){
+				return $res->result();
+			}else{
+				return null;
+			}
+		}
 		public function update_pendidikan(){
 			$data = array(
 			'nama_pendidikan' => $this->input->post('nama'),
@@ -305,6 +313,7 @@
 			$data = array(
 				'nama_jurusan' => $this->input->post('nama') ,
 				'keterangan' => $this->input->post('keterangan'),
+				'id_pendidikan' => $this->input->post('id'),
 				 );
 			$result = $this->db->insert('master_jurusan',$data);
 			return $result;

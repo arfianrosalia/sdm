@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th width="20px">No.</th>
-                            <th width="20px">ID&nbsp;JURUSAN</th>
                             <th width="190px">Nama&nbsp;JURUSAN</th>
                             <th>Keterangan</th>
                             <th width="20px">Action</th>
@@ -37,7 +36,6 @@
               
                         <tr>
                             <td><?php echo $no;?></td>
-                            <td><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_jurusan;?></td>
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">
