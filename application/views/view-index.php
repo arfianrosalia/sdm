@@ -13,8 +13,8 @@
     <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/plugins/fonts/fonts.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/plugins/fonts/fonts-material.css" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url('assets'); ?>/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">

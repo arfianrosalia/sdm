@@ -1,4 +1,9 @@
-$('#tb_Pegawai').DataTable();
+$('#tb_Training').DataTable();
+$('#tb_PegawaiTetap').DataTable();
+$('#tb_Kontrak').DataTable();
+$('#tb_AllPegawai').DataTable();
+var isChange = new Object();	
+
 $('.datetimepicker').bootstrapMaterialDatePicker({
     format: 'DD MMMM YYYY',
     clearButton: true,
@@ -111,6 +116,7 @@ $(window).on('popstate', function(event) {
 	if(state=="ADD" || state=="EDIT"){
 		$('#form_pegawai').fadeOut('fast',function(){
 			$('#list_pegawai').fadeIn('fast');
+			$('#contentPegawai').fadeIn('fast');
 			state="LIST";
 		});
 	}
@@ -403,9 +409,12 @@ function submit_add(x){
                 		text:'Rubah',
                 		btnClass:'bg-green waves-effect',
                 		action:function(){
-                			$.post(URL+'pegawai/updatePegawai',{token:c_token,data:data}).done(function(data){
+                			$.post(URL+'pegawai/updatePegawai',{token:c_token,data:data,his:isChange}).done(function(data){
+
                 				try{
+                					isChange = new Object();
 	                				var res = JSON.parse(data);
+
 
 									if(res.status==1){
 										$.confirm({
@@ -494,3 +503,41 @@ function openImage(x=null){
 		content:'<img src="'+x.attr('src')+'"/>'
 	});
 }
+
+
+function toHistory(x,y){
+	if(x=='pegawai'){
+		isChange = new Object();
+		$('#contentHistory').fadeOut('fast',function(){
+			$('#contentPegawai').fadeIn('fast',function(){
+				
+			});
+		});
+	}
+
+	if(x=='history'){
+		$('#history_detail').empty();
+		$('#contentPegawai').fadeOut('fast',function(){
+			$('#contentHistory').fadeIn('fast',function(){
+				$.post(URL+'history/d',{id:c_token,t:y}).done(function(data){
+					$('#history_detail').html(data);
+				}).fail(function(e){
+
+				});
+			});
+		});
+	}
+}
+
+
+$('select').on('change',function(){
+	let s = $(this);
+	let c = s.attr('col');
+	let v = s.val();
+
+	if(c){
+		isChange[c] = v;
+	}
+
+	console.log(isChange);
+});

@@ -31,14 +31,19 @@ class Pegawai extends CI_Controller {
 		$var['content'] = 'view-pegawai';
 		$var['js'] = 'js-pegawai';
 
+		$var['ls_pegawaiTraining'] = $this->model_pegawai->getListPegawaiTraining();
+		$var['ls_pegawaiTetap'] = $this->model_pegawai->getListPegawaiTetap();
+		$var['ls_pegawaiKontrak'] = $this->model_pegawai->getListPegawaiKontrak();
 		$var['ls_pegawai'] = $this->model_pegawai->getListPegawai();
+
+
 		$var['ls_gelar'] = $this->model_pegawai->getMaster('gelar');
 		$var['ls_pendidikan'] = $this->model_pegawai->getMaster('pendidikan');
 		$var['ls_agama'] = $this->model_pegawai->getMaster('agama');
 		$var['ls_fungsional'] = $this->model_pegawai->getMaster('fungsional');
 		$var['ls_department'] = $this->model_pegawai->getMaster('department');
 		$var['ls_jabatan'] = $this->model_pegawai->getMaster('jabatan');
-		$var['ls_lokasi_agen'] = $this->model_pegawai->getMaster('agen');
+		$var['ls_lokasi_agen'] = $this->model_pegawai->getMaster('lokasi_agen');
 		$var['ls_status_karyawan'] = $this->model_pegawai->getMaster('status_karyawan');
 		$var['ls_status_pribadi'] = $this->model_pegawai->getMaster('status_pribadi');
 		$var['ls_atasan'] = $this->model_pegawai->getAtasan();
@@ -153,6 +158,7 @@ class Pegawai extends CI_Controller {
 	public function insertPegawai(){
 		$data = $this->input->post('data');
 		$token = md5(sha1($data['c_nik']));
+		$history = $this->input->post('his');
 
 		$ck_dup = $this->db->get_where('personalia_pegawai',array('id_token'=>$token));
 		if($ck_dup->num_rows()>0){
@@ -166,6 +172,8 @@ class Pegawai extends CI_Controller {
 
 			$fix->id_token = $token;
 
+			$this->his(1,$ck_dup);
+
 			
 			$insert = $this->db->insert('personalia_pegawai',$fix);
 
@@ -176,18 +184,25 @@ class Pegawai extends CI_Controller {
 	public function updatePegawai(){
 		$token = $this->input->post('token');
 		$data = $this->input->post('data');
+		$history = $this->input->post('his');
+		
 
 		$ck_dup = $this->db->get_where('personalia_pegawai',array('id_token'=>$token));
 
 		if($ck_dup->num_rows()>0){
+			
+
 			$fix = (Object)array();
 			foreach ($data as $key => $value) {
 				$k_fix = str_replace("c_","",$key);
 				$fix->$k_fix = $value;
 			}
 
+			$this->his($history,2,$ck_dup);
+
 			
 			$update = $this->db->where('id_token',$token)->update('personalia_pegawai',$fix);
+			
 
 			if($update){
 				echo json_encode(array('status'=>1,'message'=>'Berhasil mengubah Data.'));
@@ -198,5 +213,51 @@ class Pegawai extends CI_Controller {
 		}else{
 
 		}
+	}
+
+	function his($data=null,$type=null,$ck_dup=null){
+		// HIS
+		$history = $data;
+		$c = $ck_dup->row();
+		$f_his = Array();
+
+		if(!empty($data)){
+			foreach ($history as $key => $value) {
+				$k_fix = str_replace("c_","",$key);
+
+				$MaxID = $this->db
+								->where('trigger_table','master_'.$k_fix)
+								->where('id_pegawai',$c->id)
+								->select_max('id')
+								->get('history_pegawai')->row()->id;
+
+
+				$ck_double = $this->db->get_where('history_pegawai',array('id'=>$MaxID));
+
+				if($ck_double->num_rows()>0){
+					if($ck_double->row()->trigger_id!=$value){
+						array_push($f_his,array(
+								'id_pegawai'=>$c->id,
+								'trigger_id'=>$value,
+								'trigger_table'=>'master_'.$k_fix,
+								'trigger_type'=>$type
+							)
+						);
+					}
+				}else{
+					array_push($f_his,array(
+							'id_pegawai'=>$c->id,
+							'trigger_id'=>$value,
+							'trigger_table'=>'master_'.$k_fix,
+							'trigger_type'=>$type
+						)
+					);
+				}
+
+			}
+
+			$insert_his = $this->db->insert_batch('history_pegawai',$f_his);
+		}
+		// END OF HIS
 	}
 }
