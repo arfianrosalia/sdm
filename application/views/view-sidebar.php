@@ -9,6 +9,10 @@
         <i class="material-icons">people</i>
         <span>Pegawai</span>
     </a>
+    <a href="<?php echo base_url('absensi'); ?>">
+        <i class="material-icons">assignment</i>
+        <span>Absensi</span>
+    </a>
 </li>
 <li>
     <a href="javascript:void(0);" class="menu-toggle">
