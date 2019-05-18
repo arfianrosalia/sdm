@@ -116,6 +116,47 @@
 			$data=$this->db->get_where('master_pendidikan',array('is_delete'=>0));
 			 return $data->result();
 		}
+		public function add_pendidikan(){
+			$data = array(
+				'nama_pendidikan' => $this->input->post('nama') ,
+				'keterangan' => $this->input->post('keterangan'),
+				 );
+			$result = $this->db->insert('master_pendidikan',$data);
+			return $result;
+		}
+		public function delete_pendidikan($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_pendidikan');
+			$var = $this->db->where('id',$id)->update('master_pendidikan',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idPendidikan($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_pendidikan');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function get_pendidikan(){
+			$res = $this->db->get('master_pendidikan');
+			if($res->num_rows()>0){
+				return $res->result();
+			}else{
+				return null;
+			}
+		}
+		public function update_pendidikan(){
+			$data = array(
+			'nama_pendidikan' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_pendidikan',$data);
+			return $result;
+		}
 		public function getListStatusKaryawan(){
 			$data=$this->db->get_where('master_status_karyawan',array('is_delete'=>0));
 			return $data->result();
@@ -264,6 +305,45 @@
 			$result = $this->db->where('id',$this->input->post('id'))->update('master_fungsional',$data);
 			return $result;
 		}
+		public function getListjurusan(){
+			$data=$this->db->get_where('master_jurusan',array('is_delete'=>0));
+			return $data->result();
+		}
+		public function add_jurusan(){
+			$data = array(
+				'nama_jurusan' => $this->input->post('nama') ,
+				'keterangan' => $this->input->post('keterangan'),
+				'id_pendidikan' => $this->input->post('id'),
+				 );
+			$result = $this->db->insert('master_jurusan',$data);
+			return $result;
+		}
+		public function delete_jurusan($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_jurusan');
+			$var = $this->db->where('id',$id)->update('master_jurusan',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idjurusan($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_jurusan');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function update_jurusan(){
+			$data = array(
+			'nama_jurusan' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_jurusan',$data);
+			return $result;
+		}
+
 		public function getListWilayahDistricts(){
 			
 			$this->db->order_by("id" ,"desc");

@@ -9,7 +9,7 @@
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
                         <h2>LIST MASTER PENDIDIKAN</h2><br>
-                         <button type="button" class="btn btn-success waves-effect">
+                         <button type="button" class="btn btn-success waves-effect" onclick="addPendidikan()">
                                 <i class="material-icons">queue</i>
                                 <span>Tambah Data</span>
                          </button>
@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama&nbsp;Pendidikan</th>
                             <th>Keterangan</th>
                             <th>Action</th>
@@ -37,7 +36,6 @@
                             foreach($ls_pendidikan as $key => $value){?>
                         <tr>
                             <td width="20px" align="center"><?php echo $no;?></td>
-                            <td width="20px" align="center"><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_pendidikan;?></td>
                             <td><?php echo $value->keterangan;?></td>
                             <td align="center">

@@ -26,7 +26,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama&nbsp;Gelar</th>
                             <th width="30px">Action</th>
                             
@@ -38,7 +37,6 @@
                             foreach ($ls_agama as $key => $value){?>
                         <tr>
                             <td width="20px" align="center"><?php echo $no;?></td>
-                            <td width="50px" align="center"><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_agama ;?></td>
                             <td align="center">
                             

@@ -33,9 +33,19 @@
             <a href="<?php echo base_url('master/master_StatusKaryawan'); ?>">Status Karyawan</a>
         </li>
         <li>
-            <a href="<?php echo base_url('master/master_pendidikan'); ?>">Pendidikan</a>
+            <a href="javascript:void(0);" class="menu-toggle">
+                Pendidikan
+            </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="<?php echo base_url('master/master_pendidikan'); ?>">Nama Pendidikan</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url('master/master_Jurusan'); ?>">Jurusan</a>
+                </li>
+            </ul>
         </li>
-          <li>
+        <li>
             <a href="<?php echo base_url('master/master_agen'); ?>">Agen</a>
         </li>
           <li>

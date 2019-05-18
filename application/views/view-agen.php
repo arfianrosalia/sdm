@@ -24,10 +24,8 @@
                     <thead>
                         <tr>
                             <th width="10px">No.</th>
-                            <th width="10px">ID</th>
-                            <th>Kode&nbsp;Agen</th>
+
                             <th>Nama&nbsp;Agen</th>
-                            <th>Kota</th>
                             <th>Alamat</th>
                             <th>Action</th>
                         </tr>
@@ -38,9 +36,6 @@
                             foreach ($ls_agen as $key => $value){?>
                         <tr>
                             <td width="20px" align="center"><?php echo $no;?></td>
-                            <td  align="center"><?php echo $value->id;?></td>
-                            <td><?php echo $value->kd_agen;?></td>
-                            <td><?php echo $value->tlcode;?></td>
                              <td><?php echo $value->nama_agen;?></td>
                               <td><?php echo $value->alamat;?></td>
                              <td align="center">

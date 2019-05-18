@@ -25,6 +25,7 @@
 					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
 					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
+
 					->order_by('p.id','desc')
 					->get();
 			if($load->num_rows()>0){
@@ -124,6 +125,7 @@
 					->join('master_status_karyawan','master_status_karyawan.id=p.status_karyawan','left')
 					->join('personalia_pegawai pa','pa.id=p.atasan','left')
 					->join('master_lokasi_agen','master_lokasi_agen.id=p.lokasi_agen','left')
+
 					->order_by('p.id','desc')
 					->get();
 			if($load->num_rows()>0){

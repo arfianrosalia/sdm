@@ -1,5 +1,5 @@
 <div class="block-header">
-    <h2>MASTER SETATUS</h2>
+    <h2>MASTER SETATUS PRIBADI</h2>
 </div>
 
 <div class="row clearfix">
@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama Status Pribadi</th>
                             <th>Katerangan</th>
                             <th>Action</th>
@@ -37,7 +36,6 @@
                          ?>
                         <tr>
                             <td  align="center"><?php echo $no;?></td>
-                            <td  align="center"><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_status_pribadi;?></td>
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">

@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th width="20px" align="center">No.</th>
-                            <th>ID&nbsp;Provinsi</th>
                             <th>Nama&nbsp;Provinsi</th>
                            
                         </tr>
@@ -33,7 +32,6 @@
                             ?>
                         <tr>
                             <td align="center"><?php echo $no; ?></td>
-                            <td><?php echo $value->id;?></td>
                             <td><?php echo $value->name;?></td>
                             
                         </tr>

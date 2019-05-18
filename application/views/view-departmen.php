@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID&nbsp;DEPARTMENT</th>
                             <th>Nama&nbsp;DEPARTMENT</th>
                             <th>Keterangan</th>
                             <th>Action</th>
@@ -37,7 +36,6 @@
               
                         <tr>
                             <td><?php echo $no;?></td>
-                            <td><?php echo $value->id;?></td>
                             <td><?php echo $value->nama_department;?></td>
                             <td><?php echo $value->keterangan;?></td>
                              <td align="center">
