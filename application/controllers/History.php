@@ -16,6 +16,10 @@ class History extends CI_Controller {
 				$var['ls_history'] = $this->model_history->x($id,'master_department','department');
 				$var['title'] = 'Department';
 				break;
+			case 'sd':
+				$var['ls_history'] = $this->model_history->x($id,'master_department_sub','department_sub');
+				$var['title'] = 'Sub Department';
+				break;
 			case 'j':
 				$var['ls_history'] = $this->model_history->x($id,'master_jabatan','jabatan');
 				$var['title'] = 'Jabatan';

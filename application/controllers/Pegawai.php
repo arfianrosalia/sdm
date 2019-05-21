@@ -42,6 +42,7 @@ class Pegawai extends CI_Controller {
 		$var['ls_agama'] = $this->model_pegawai->getMaster('agama');
 		$var['ls_fungsional'] = $this->model_pegawai->getMaster('fungsional');
 		$var['ls_department'] = $this->model_pegawai->getMaster('department');
+		$var['ls_department_sub'] = $this->model_pegawai->getMaster('department_sub');
 		$var['ls_jabatan'] = $this->model_pegawai->getMaster('jabatan');
 		$var['ls_lokasi_agen'] = $this->model_pegawai->getMaster('lokasi_agen');
 		$var['ls_status_karyawan'] = $this->model_pegawai->getMaster('status_karyawan');
@@ -137,6 +138,18 @@ class Pegawai extends CI_Controller {
 
 		if(!empty($var['ls_kota'])){
 			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_kota']));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
+		}
+	}
+
+	public function getSubDepartment(){
+		$this->load->model('model_pegawai');	
+		$id_depart = $this->input->post('x');
+		$var['ls_department_sub'] = $this->model_pegawai->getMaster('department_sub',array('is_delete'=>0,'id_department'=>$id_depart));
+
+		if(!empty($var['ls_department_sub'])){
+			echo json_encode(array('status'=>1,'message'=>'Data ditemukan','result'=>$var['ls_department_sub']));
 		}else{
 			echo json_encode(array('status'=>0,'message'=>'Data tidak ditemukan','result'=>null));
 		}

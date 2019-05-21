@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To | SDM&nbsp;&&nbsp; UMUM</title>
+    <title>Welcome To | SDM&nbsp;&nbsp; UMUM</title>
     <!-- Favicon-->
     <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 
@@ -548,7 +548,7 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/<?php echo $js; ?>.js"></script>
     <script type="text/javascript">
         function signOut(){
-            alert('');
+            window.location.href = URL+'home/logout';
         }
     </script>
 </body>

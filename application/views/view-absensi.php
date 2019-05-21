@@ -1,4 +1,4 @@
-<!-- <div class="row clearfix" id="list_absensi">
+<div class="row clearfix" id="list_absensi">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="body">
@@ -27,7 +27,7 @@
 </div>
 
 
- -->
+
 <?php if(1+1==2){ ?>
 
 

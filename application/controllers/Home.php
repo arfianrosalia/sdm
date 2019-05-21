@@ -27,17 +27,19 @@ class Home extends CI_Controller {
 
 	public function gen_user(){
 		$in = $this->db->get('tmpegawai_copy')->result();
+		$toInsert = array();
 
 		foreach ($in as $key => $value) {
-			$this->db->insert('personalia_pegawai',array(
+			array_push($toInsert,array(
 				'id'=>$value->PegawaiID,
 				'nik'=>$value->NIK,
+				'no_ktp'=>$value->noKtp,
 				'nama_lengkap'=>$value->NamaLengkap,
 				'nama_singkat'=>$value->NamaSingkat,
 				'fungsional'=>$value->Fungsional,
 				'tmt'=>$value->TMT,
 				'department'=>$value->DepartemenID,
-				'wilayah'=>$value->WilayahID,
+				'lokasi_agen'=>$value->WilayahID,
 				'jabatan'=>$value->JabatanID,
 				'status_karyawan'=>$value->StatusKaryawanID,
 				'gelar'=>$value->GelarID,
@@ -60,7 +62,22 @@ class Home extends CI_Controller {
 			));
 		}
 
-		echo "SUKSES";
+		$insert_user = $this->db->insert_batch('personalia_pegawai',$toInsert);
+
+		if($insert_user){
+			$this->gen_kota_kelahiran();
+			$this->gen_token();
+		}
+	}
+
+	public function gen_token(){
+		$p = $this->db->select('id,nik')->get('personalia_pegawai')->result();
+
+		foreach ($p as $key => $value) {
+			$this->db->where('id',$value->id)->update('personalia_pegawai',array(
+				'id_token'=>md5(sha1($value->nik))
+			));
+		}
 	}
 
 	public function ch_fungsional(){
@@ -81,7 +98,7 @@ class Home extends CI_Controller {
 				return date('Y-m-d H:i:s');
 			}
 		}
-		$in = $this->db->get('tmdepartemen')->result();
+		$in = $this->db->get('tmdepartment')->result();
 
 		foreach ($in as $key => $value) {
 			$this->db->insert('master_department',array(
@@ -118,6 +135,28 @@ class Home extends CI_Controller {
 		}
 
 		echo "SUKSES";
+	}
+
+	public function gen_kota_kelahiran(){
+		$p = $this->db->select('id,kota_kelahiran')->get('personalia_pegawai')->result();
+
+		foreach ($p as $key => $value) {
+			$id_kota = $this->db->select('id,name')->like('name',$value->kota_kelahiran,'both')->get('wilayah_regencies');
+
+			if(!empty($value->kota_kelahiran)){
+				if($id_kota->num_rows()>0){
+					$this->db->where('id',$value->id)->update('personalia_pegawai',array(
+						'kota_kelahiran'=>$id_kota->row()->id
+					));
+				}
+			}
+		}
+	}
+
+	public function logout(){
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('password');
+		redirect('login');
 	}
 }
 

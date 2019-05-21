@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Loginlogin extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,12 +19,13 @@ class Loginlogin extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index(){
-		$this->load->view('view-log');
+		// echo $this->session->username;
+		$this->load->view('view-login');
 	}
 
 	public function submit(){
-		
-		
+		// echo $this->uri->segment(1);
+
 		$this->session->set_userdata('username',$this->input->post('username'));
 		$this->session->set_userdata('password',$this->input->post('password'));
 		redirect('pegawai');
