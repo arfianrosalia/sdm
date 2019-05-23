@@ -271,10 +271,12 @@
                     <button type="button" class="list-group-item waves-effect" onclick="document.getElementById('ft').click()"><span class="fa fa-camera"></span>&nbsp;Ubah Foto Profil</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('pegawai')"><span class="fa fa-pen"></span>&nbsp;Form Data Pegawai</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','d')"><span class="fa fa-building"></span>&nbsp;Histori Departmen</button>
+                    <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','sd')"><span class="fa fa-building"></span>&nbsp;Histori Sub Departmen</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','j')"><span class="fa fa-child"></span>&nbsp;Histori Jabatan</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','s')"><span class="fa fa-street-view"></span>&nbsp;Histori Status Karyawan</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','a')"><span class="fa fa-home"></span>&nbsp;Histori Agen</button>
                     <button type="button" class="list-group-item waves-effect" onclick="toHistory('history','p')"><span class="fa fa-laptop"></span>&nbsp;Histori Pelatihan</button>
+                    <button type="button" class="list-group-item waves-effect bg-green" onclick="toAccess()"><span class="fa fa-unlock"></span>&nbsp;Setelan Hak Akses</button>
                 </div>
             </div>
         </div>
@@ -329,7 +331,7 @@
         </div> -->
     </div>
 
-    <div id="contentPegawai">
+    <div id="contentPegawai" class="trigger">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -508,17 +510,10 @@
                         <div class="row clearfix">
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <label for="email_address">Fungsional</label>
+                                <label class="form-label">Fungsional</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select class="form-control show-tick design-select" col="c_fungsional" name="fungsional">
-                                            <option disabled="disabled" selected="selected">-- Pilih Fungsional --</option>
-                                            <?php if(!empty($ls_fungsional)){ ?>
-                                                <?php foreach ($ls_fungsional as $key => $value) { ?>
-                                                    <option value="<?php echo $value->id; ?>"><?php echo $value->nama_fungsional; ?></option>
-                                                <?php } ?>
-                                            <?php } ?>
-                                        </select>
+                                        <input type="text" class="form-control" col="c_fungsional" name="fungsional">
                                     </div>
                                 </div>
                             </div>
@@ -535,15 +530,31 @@
                         </div>
 
                         <div class="row clearfix">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <label for="email_address">Department</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select class="form-control show-tick design-select" col="c_department" name="department">
+                                        <select class="form-control show-tick design-select" col="c_department" name="department" onchange="ch_sub_department($(this).val())">
                                             <option disabled="disabled" selected="selected">-- Pilih Department --</option>
                                             <?php if(!empty($ls_department)){ ?>
                                                 <?php foreach ($ls_department as $key => $value) { ?>
                                                     <option value="<?php echo $value->id; ?>"><?php echo $value->nama_department; ?></option>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <label for="email_address">Sub Departmennt</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick design-select" col="c_department_sub" name="department_sub" >
+                                            <option disabled="disabled" selected="selected">-- Pilih Sub Department --</option>
+                                            <?php if(!empty($ls_department_sub)){ ?>
+                                                <?php foreach ($ls_department_sub as $key => $value) { ?>
+                                                    <option value="<?php echo $value->id; ?>"><?php echo $value->nama_department_sub; ?></option>
                                                 <?php } ?>
                                             <?php } ?>
                                         </select>
@@ -825,8 +836,14 @@
         </button>
     </div>
 
-    <div id="contentHistory">
+    <div id="contentHistory" class="trigger">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id="history_detail">
+
+        </div>
+    </div>
+
+    <div id="contentAccess" class="trigger">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id="access_detail">
 
         </div>
     </div>

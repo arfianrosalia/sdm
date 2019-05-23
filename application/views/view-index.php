@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To | SDM&nbsp;&&nbsp; UMUM</title>
+    <title>Welcome To | SDM&nbsp;&nbsp; UMUM</title>
     <!-- Favicon-->
     <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 
@@ -303,7 +303,7 @@
                             <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="javascript:signOut();"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -546,6 +546,11 @@
     <!-- Demo Js -->
     <script src="<?php echo base_url(); ?>assets/ext/js/demo.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/<?php echo $js; ?>.js"></script>
+    <script type="text/javascript">
+        function signOut(){
+            window.location.href = URL+'home/logout';
+        }
+    </script>
 </body>
 
 </html>

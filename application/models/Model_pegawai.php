@@ -146,6 +146,7 @@
 						p.fungsional,
 						p.tmt,
 						p.department,
+						p.department_sub,
 						p.lokasi_agen,
 						p.wilayah,
 						p.jabatan,
@@ -210,8 +211,12 @@
 			}
 		}
 
-		public function getMaster($master=null){
-			$select = $this->db->get_where('master_'.$master,array('is_delete'=>0));
+		public function getMaster($master=null,$ext=null){
+			if(!empty($ext)){
+				$select = $this->db->get_where('master_'.$master,$ext);
+			}else{
+				$select = $this->db->get_where('master_'.$master,array('is_delete'=>0));
+			}
 
 			if($select->num_rows()>0){
 				return $select->result();

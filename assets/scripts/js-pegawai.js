@@ -26,6 +26,7 @@ window.onload = function(){
 	$('#list_pegawai').fadeIn('fast');
 }
 
+
 function formAdd(){
 	resetPhoto();
 	resetForm();
@@ -97,6 +98,7 @@ function detail(x=null){
 					$('#form_detail input[name="nik"]').removeAttr('col');
 
 					ch_prov_kota_kelahiran(res.result.provinsi_kelahiran,res.result.kabupaten_kelahiran);
+					ch_sub_department(res.result.department,res.result.department_sub);
 				}
 
 
@@ -147,6 +149,30 @@ function ch_prov_kota_kelahiran(id_prov=null,id_kota=null){
 
 		if(id_kota!=null){
 			$("select[name='kt_kelahiran']").val(id_kota);
+		}
+	}).fail(function(e){
+
+	});
+}
+
+function ch_sub_department(id_department=null,id_sub_department=null){
+	$("select[name='department_sub']").html('<option disabled="disabled" selected="selected">-- Pilih Sub Department --</option>');
+	$.post(URL+'pegawai/getSubDepartment',{x:id_department}).done(function(dt){
+		try {
+			// statements
+			var r = JSON.parse(dt);
+			// $("select[name='department_sub']").empty();
+
+			r.result.forEach(function(item,i){
+				$("select[name='department_sub']").append(new Option(item.nama_department_sub, item.id));
+			});
+
+			if(id_sub_department!=null){
+				$("select[name='department_sub']").val(id_sub_department);
+			}
+		} catch(e) {
+			// statements
+			console.log(e.message);
 		}
 	}).fail(function(e){
 
@@ -226,6 +252,7 @@ function submit_add(x){
 	var data = new Object();
 	var validate = 0;
 	var first = "";
+	var noInput = "";
 
 	arrInput.forEach(function(item,index){
         let value = x.parent().find('input[col]').eq(index).val();
@@ -234,6 +261,7 @@ function submit_add(x){
 			data[x.parent().find('input[col]').eq(index).attr('col')] = x.parent().find('input[col]').eq(index).val();
 		}else{
 			validate++;
+			noInput+=x.parent().find('input[col]').eq(index).attr('col').replace('c_','').replace('_',' ')+'<br>';
 			if(first==""){
 				first=x.parent().find('input[col]').eq(index);
 			}
@@ -248,7 +276,7 @@ function submit_add(x){
 			data[x.parent().find('select[col]').eq(index).attr('col')] = x.parent().find('select[col]').eq(index).val();
 		}else{
 			validate++;
-
+			noInput+=x.parent().find('select[col]').eq(index).attr('col').replace('c_','').replace('_',' ')+'<br>';
 			if(first==""){
 				first=x.parent().find('select[col]').eq(index);
 			}
@@ -268,6 +296,7 @@ function submit_add(x){
 			data[x.parent().find('textarea[col]').eq(index).attr('col')] = x.parent().find('textarea[col]').eq(index).val();
 		}else{
 			validate++;
+			noInput+=x.parent().find('textarea[col]').eq(index).attr('col').replace('c_','').replace('_',' ')+'<br>';
 			if(first==""){
 				first=x.parent().find('textarea[col]').eq(index);
 			}
@@ -281,22 +310,7 @@ function submit_add(x){
 		first.focus();
 	}
 
-	if(validate>0){
-		$.confirm({
-            icon: 'fa fa-exclamation-triangle',
-            closeIcon: false,
-            animation: 'scale',
-            type: 'red',
-            title:'Pesan Error',
-            content:'Form belum lengkap. Silakan melengkapi semua form terlebih dahulu.',
-            buttons:{
-            	submit:{
-            		text:'OKE',
-            		btnClass:'bg-light waves-effect'
-            	}
-            }
-        });
-	}else{
+	var process = function(){
 		if(state=='ADD'){
 			$.confirm({
                 icon: 'fa fa-question-circle',
@@ -495,6 +509,41 @@ function submit_add(x){
 		}
 	}
 
+
+	if(validate>0){
+
+		var btnLjt = {
+    		text:'Tetap Lanjutkan',
+    		btnClass:'bg-orange waves-effect',
+    		action:function(){
+    			process();
+    		}
+    	};
+
+    	var btnBatal = {
+    		text:'Batal',
+    		btnClass:'bg-light waves-effect'
+    	}	
+
+
+		$.confirm({
+            icon: 'fa fa-exclamation-triangle',
+            closeIcon: false,
+            animation: 'scale',
+            type: 'red',
+            title:'Pesan Error',
+            content:'Form belum lengkap. Silakan melengkapi semua form terlebih dahulu.<br><br>'+'List : <br><b style="color:red;">'+noInput.toUpperCase()+'</b>',
+            buttons:{
+            	submit:{
+            		text:'Lengkapi!',
+            		btnClass:'bg-green waves-effect'
+            	},lanjut:state=='EDIT'?btnLjt:btnBatal
+            }
+        });
+	}else{
+		process();
+	}
+
 }
 
 function openImage(x=null){				
@@ -529,6 +578,20 @@ function toHistory(x,y){
 	}
 }
 
+function toAccess(){
+	$.post(URL+'access/a',{token:c_token}).done(function(data){
+		$('#history_detail').empty();
+		$('.trigger').fadeOut('fast',function(){
+			$('#contentAccess').fadeIn('fast',function(){
+				$('#access_detail').html(data);
+			});
+		});
+	}).fail(function(e){
+		$('#access_detail').html('Error Loading Data...');
+	});
+	
+}
+
 
 $('select').on('change',function(){
 	let s = $(this);
@@ -541,3 +604,29 @@ $('select').on('change',function(){
 
 	console.log(isChange);
 });
+
+
+function s_access(x=null){
+	var ck = x.parent().parent().find('input[ha]');
+	var inp = x.parent().parent().find('input[us]');
+
+	var arr_ck = ck.toArray();
+	var arr_inp = inp.toArray();
+
+	var value = new Object();
+	arr_ck.forEach(function(item,index){
+		value['akses_'+ck.eq(index).attr('ha')] = ck.eq(index).prop("checked")==true?1:0;
+	});
+
+	var valueInp = new Object();
+	arr_inp.forEach(function(item,index){
+		value[inp.eq(index).attr('us')] = inp.eq(index).val();
+	});
+
+	$.post(URL+'access/u',{token:c_token,data:value,input:valueInp}).done(function(data){
+		alert('SUKSES');
+	}).fail(function(){
+
+	});
+
+}
