@@ -8,80 +8,40 @@ $('#tb_master').DataTable({
 
 
 
-function addJurusan(){
+function add_sub_department(){
+    $.confirm({
+    title: 'INPUT SUB DEPARTMENT',
+    content:function(){
+            var self = this;
+            return $.post(URL+'master/get_idsubdepartment_add/').done(function(data){
+            self.setContent(data);
+            }).fail(function(e){
 
-    $.post(URL+'master/get_pendidikan').done(function(data){
-            try{
-                var res = JSON.parse(data);
-                var pendidikan = '<select class="form-control show-tick" id="pendidikan" >';
-                res.forEach( function(item,index){
-                    pendidikan+= `<option value="`+item.id+`">`+ item.nama_pendidikan+`</option>`;
-                }); 
-                pendidikan+= '</select>';
-                var form=`              <div class="body">
-                            <form class="form-horizontal">
-                                
-                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">NAMA JURUSAN</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="nama_jurusan" placeholder="Masukan Nama jurusan" required>
-                                            </div>
-                                        </div>
-                                    </div><br><br><br>
-                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">PENDIDIKAN</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                            `+pendidikan+`
-                                                 
-                                            </div>
-                                        </div>
-                                    </div><br><br><br>
-                                    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4 form-control-label">
-                                        <label for="email_address_2">KETERANGAN</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-4 col-sm-8 col-xs-6">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <textarea class="form-control" name="keterangan" placeholder="Masukan Keterangan" required></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                            </form>
-                            </div>
-                `;
-            $.confirm({
-                title: 'INPUT JURUSAN',
-                columnClass:'col-md-6 col-md-offset-3 ',
-                animation: 'scale',
-                closeAnimation: 'rotateYR', 
-                icon: 'fa fa-plus-square',
-                theme: 'material',
-                type: 'blue',
-                content:form,
-                buttons: {
-                formSubmit: {
-                            text: 'Simpan',
-                            btnClass: 'btn-blue',
-                            action: function () {
-                                var nama = this.$content.find('input[name="nama_jurusan"]').val();
-                                var keterangan = this.$content.find('textarea[name="keterangan"]').val();
-                                var id = this.$content.find('select#pendidikan').val();
-                                if(nama==''|| keterangan==''){
-                                    $.alert('Form Belum Diisi lengkap..!');
-                                    return false;
-                                }else{
-                                    $.ajax({
-                                        type : 'POST',
-                                        url  :  URL+'master/add_jurusan',
-                                        data : {nama : nama , keterangan : keterangan, id : id } ,
-                                     success: function(data){
+            });
+            },
+    columnClass:'col-md-6 col-md-offset-3 ',
+    animation: 'scale',
+    closeAnimation: 'rotateYR', 
+    icon: 'fa fa-plus-square',
+    theme: 'material',
+    type: 'blue',
+    buttons: {
+        formSubmit: {
+            text: 'Simpan',
+            btnClass: 'btn-blue',
+            action: function () {
+                 var nama = this.$content.find('input[name="nama_subDepartment"]').val();
+                 var id_department = this.$content.find('select[name="id_department"]').val();
+                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
+                if(nama==''||keterangan==''){
+                    $.alert('Form Belum Diisi lengkap..!');
+                    return false;
+                }else{
+                    $.ajax({
+                        type : 'POST',
+                        url  :  URL+'master/add_subdepartment',
+                        data : {nama : nama, id_department : id_department, keterangan:keterangan },
+                        success: function(data){
                                     $.confirm({
                                             title:'Pesan Sukses',
                                             content:'Berhasil menambahkan data.',
@@ -96,7 +56,7 @@ function addJurusan(){
                                                     text:'CLOSE',
                                                     btnClass:'btn-green waves waves-effect',
                                                     action:function(){
-                                                       window.location.reload();  
+                                                      window.location.reload();   
                                                     }
                                                 }
                                             }
@@ -121,16 +81,7 @@ function addJurusan(){
         });
     }
 });
-                console.log(data);
-            }catch(e){
-                console.log(e);
-            }finally{
-                $('#form_pegawai').fadeIn('fast');
-            }
-        }).fail(function(){
-
-        });       
-	
+   
 
 
 	
@@ -150,7 +101,7 @@ function hapus(id,el){
                     text:'HAPUS',
                     btnClass:'btn-red waves waves-effect',
                     action:function(){
-                        $.post(URL+'master/delete_jurusan',{id:id}).done(function(data){
+                        $.post(URL+'master/delete_subdepartment',{id:id}).done(function(data){
                             if (data=='1') {
                                 el.closest('tr').remove();
                                 $('#tb_master').DataTable().draw('false');
@@ -197,9 +148,8 @@ function edit(id,el){
                  title:'Edit Data',
                   content:function(){
                     var self = this;
-                    return $.post(URL+'master/get_idjurusan/',{id:id}).done(function(data){
-                       
-                        self.setContent(data);
+                    return $.post(URL+'master/get_idsubdepartment_edit/',{id:id}).done(function(data){
+                    self.setContent(data);
                     }).fail(function(e){
 
                     });
@@ -216,8 +166,8 @@ function edit(id,el){
                             btnClass: 'btn-blue',
                             action: function () {
                                 var id = this.$content.find('input[name="id"]').val();
-                                var nama = this.$content.find('input[name="nama_jurusan"]').val();
-                                var id_pendidikan = this.$content.find('select[name="id_pendidikan"]').val();
+                                var nama = this.$content.find('input[name="nama_subDepartment"]').val();
+                                var id_department = this.$content.find('select[name="id_department"]').val();
                                 var keterangan = this.$content.find('textarea[name="keterangan"]').val();
                                 if(nama==''|| keterangan==''){
                                    $.alert('Form Belum Diisi lengkap..!');
@@ -225,8 +175,8 @@ function edit(id,el){
                             }else{
                                 $.ajax({
                                  type : 'POST',
-                                 url  :  URL+'master/update_jurusan',
-                                  data : {id : id ,nama : nama ,id_pendidikan : id_pendidikan, keterangan : keterangan},
+                                 url  :  URL+'master/update_subdepartment',
+                                  data : {id : id ,nama : nama ,id_department : id_department, keterangan : keterangan},
                                   success: function(data){
                                     if (data=='true') {
                                            
