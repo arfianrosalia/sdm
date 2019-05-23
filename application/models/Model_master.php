@@ -67,12 +67,85 @@
 				return null;
 			}
 		}
+		public function get_department(){
+			$res = $this->db->get('master_department');
+			if($res->num_rows()>0){
+				return $res->result();
+			}else{
+				return null;
+			}
+		}
 		public function update_department(){
 			$data = array(
 			'nama_department' => $this->input->post('nama'),
 			'keterangan' => $this->input->post('keterangan')
 			);
 			$result = $this->db->where('id',$this->input->post('id'))->update('master_department',$data);
+			return $result;
+		}
+		public function getListSubDepartment(){
+			$this->load->database();
+			$filed = '
+					s.id,
+					s.id_department,
+					s.keterangan,
+					s.nama_department_sub,
+					s.is_delete,
+					d.nama_department
+					';
+
+			$data=	$this->db
+					->select($filed)
+					->from('master_department_sub as s')
+					->join('master_department as d', 's.id_department=d.id')
+					->get_where('master_department_sub' ,array('s.is_delete' => 0));
+			if($data->num_rows()>0){
+				return $data->result();
+			}else{
+				return null;
+			}
+		}
+		public function add_sub_department(){
+			$data = array(
+				'nama_department_sub' => $this->input->post('nama') ,
+				'id_department' => $this->input->post('id_department') ,
+				'keterangan' => $this->input->post('keterangan'),
+				 );
+			$result = $this->db->insert('master_department_sub',$data);
+			return $result;
+		}
+		public function delete_sub_department($id=null){
+			$this->db->select('id')->where('id',$id)->get('master_department_sub');
+			$var = $this->db->where('id',$id)->update('master_department_sub',array('is_delete'=>1,'delete_date'=>date('Y-m-d H:i:s')));
+			if($var){
+				return true;
+			}else{
+				return null;
+			}
+		}
+		public function get_idSubDepartment($id=null){
+			$res = $this->db->where('is_delete',0)->where('id',$id)->select('*')->get('master_department_sub');
+			if($res->num_rows()>0){
+				return $res->row();
+			}else{
+				return null;
+			}
+		}
+		public function get_subDepartment(){
+			$res = $this->db->get('master_department_sub');
+			if($res->num_rows()>0){
+				return $res->result();
+			}else{
+				return null;
+			}
+		}
+		public function update_sub_department(){
+			$data = array(
+			'id_department' => $this->input->post('id_department'),	
+			'nama_department_sub' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan')
+			);
+			$result = $this->db->where('id',$this->input->post('id'))->update('master_department_sub',$data);
 			return $result;
 		}
 		public function getListJabatan(){
@@ -313,7 +386,7 @@
 			$data = array(
 				'nama_jurusan' => $this->input->post('nama') ,
 				'keterangan' => $this->input->post('keterangan'),
-				'id_pendidikan' => $this->input->post('id'),
+				'id_pendidikan' => $this->input->post('id'), 
 				 );
 			$result = $this->db->insert('master_jurusan',$data);
 			return $result;
@@ -338,6 +411,7 @@
 		public function update_jurusan(){
 			$data = array(
 			'nama_jurusan' => $this->input->post('nama'),
+			'id_pendidikan' => $this->input->post('id_pendidikan'),
 			'keterangan' => $this->input->post('keterangan')
 			);
 			$result = $this->db->where('id',$this->input->post('id'))->update('master_jurusan',$data);

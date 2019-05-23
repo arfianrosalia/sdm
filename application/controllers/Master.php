@@ -62,9 +62,52 @@ class Master extends CI_Controller {
 		$data = $this->model_master->get_idDepartment($_POST['id']);
 		echo json_encode($data);
 	}
+	public function get_department(){
+		$this->load->model('model_master');
+		$data = $this->model_master->get_department();
+		echo json_encode($data);
+	}
 	public function update_department(){
 		$this->load->model('model_master');
 		$data = $this->model_master->update_department();
+		echo json_encode($data);
+		
+	}
+	public function master_subdepartment(){
+		$this->load->model('model_master');
+		$var['js'] = 'js-masterDepartment-sub';
+		$var['content'] = 'view-department-sub';
+		$var['ls_department'] = $this->model_master->getListSubDepartment();
+		$this->load->view('view-index',$var);
+	}
+	public function add_subdepartment(){
+		$this->load->model('model_master');
+		$data = $this->model_master-> add_sub_department();
+		echo json_encode($data);
+	}
+	public function delete_subdepartment(){
+		$this->load->model('model_master');
+		$var = $this->model_master->delete_sub_department($_POST['id']);
+		if ($var) {
+			echo "1";
+		}else{
+			echo "0";
+		}
+	}
+	public function get_idsubdepartment_add(){
+		$this->load->model('model_master');
+		$var['ls_department'] = $this->model_master->get_department();
+		$this->load->view('view-department-sub-add',$var);
+	}
+	public function get_idsubdepartment_edit(){
+		$this->load->model('model_master');
+		$var['ls_department'] = $this->model_master->get_department();
+		$var['data'] = $this->model_master->get_idSubDepartment($_POST['id']);
+		$this->load->view('view-department-sub-edit',$var);
+	}
+	public function update_subdepartment(){
+		$this->load->model('model_master');
+		$data = $this->model_master->update_sub_department();
 		echo json_encode($data);
 		
 	}
@@ -93,8 +136,10 @@ class Master extends CI_Controller {
 	
 	public function get_idJurusan(){
 		$this->load->model('model_master');
-		$data = $this->model_master->get_idjurusan($_POST['id']);
-		echo json_encode($data);
+		$var['ls_pendidikan'] = $this->model_master->get_pendidikan();
+		$var['data'] = $this->model_master->get_idjurusan($_POST['id']);
+		$this->load->view('view-jurusan-add',$var);
+		
 	}
 	public function update_jurusan(){
 		$this->load->model('model_master');
