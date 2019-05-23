@@ -30,6 +30,8 @@ class Access extends CI_Controller {
 			}
 		}
 
+		print_r($var['ls_ha']);
+
 		// $var['person'] = $this->_acc()->p($id_token);
 
 		$this->load->view('view-hak_akses',$var);
