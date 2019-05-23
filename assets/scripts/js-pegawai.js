@@ -608,22 +608,15 @@ $('select').on('change',function(){
 
 function s_access(x=null){
 	var ck = x.parent().parent().find('input[ha]');
-	var inp = x.parent().parent().find('input[us]');
 
 	var arr_ck = ck.toArray();
-	var arr_inp = inp.toArray();
 
 	var value = new Object();
 	arr_ck.forEach(function(item,index){
 		value['akses_'+ck.eq(index).attr('ha')] = ck.eq(index).prop("checked")==true?1:0;
 	});
 
-	var valueInp = new Object();
-	arr_inp.forEach(function(item,index){
-		value[inp.eq(index).attr('us')] = inp.eq(index).val();
-	});
-
-	$.post(URL+'access/u',{token:c_token,data:value,input:valueInp}).done(function(data){
+	$.post(URL+'access/u',{token:c_token,data:value}).done(function(data){
 		alert('SUKSES');
 	}).fail(function(){
 

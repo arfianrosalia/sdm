@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Absensi extends CI_Controller {
+class Api extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,10 +20,6 @@ class Absensi extends CI_Controller {
 	 */
 	public function index(){
 		
-		$var['content'] = 'view-absensi';
-		$var['js'] = 'js-absensi';
-
-		$this->load->view('view-index',$var);
 	}
 
 	public function getBySubDepartment(){
