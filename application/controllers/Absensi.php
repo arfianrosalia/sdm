@@ -27,9 +27,8 @@ class Absensi extends CI_Controller {
 	}
 
 	public function getBySubDepartment(){
-		$inp_user = $this->input->post('token');
-		$inp_nik = $this->input->post('nik');
-		$inp_pass = md5(sha1($this->input->post('password')));
+		$inp_user = $this->session->username;
+		$inp_pass = md5(sha1($this->session->password)));
 
 		$pengabsen = $this->db->select('
 			id,

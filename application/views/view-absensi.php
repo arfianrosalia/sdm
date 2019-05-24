@@ -1,32 +1,46 @@
-<div class="row clearfix" id="list_absensi">
+
+<div class="row clearfix">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
-            <div class="body">
+            <div class="header">
                 <div class="row clearfix">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="demo-checkbox">
-                                <input type="checkbox" id="user-1" class="filled-in">
-                                <label for="user-1">Agung Purnomo</label>
-                                <hr>
-                                <input type="checkbox" id="user-2" class="filled-in">
-                                <label for="user-2">Indriawan</label>
-                                <input type="checkbox" id="user-3" class="filled-in">
-                                <label for="user-3">Deny Hendra</label>
-                                <input type="checkbox" id="user-4" class="filled-in">
-                                <label for="user-4">Rudy P</label>
-                                <input type="checkbox" id="user-5" class="filled-in">
-                                <label for="user-5">Arif Mustaqim</label>
-                                <input type="checkbox" id="user-6" class="filled-in">
-                                <label for="user-6">Moch Arfian</label>
-                            </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h2>LIST Agama</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 align-right">
+                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
                     </div>
                 </div>
+            </div>
+            <div class="body">
+             <div class="row clearfix">
+             <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <b><input type="text" class="form-control" value="Agung P" placeholder="col-md-4" readonly="readonly"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-line" align="center">
+                                <b><input type="text" class="form-control" value="Programmer" placeholder="col-md-4" readonly="readonly"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="demo-checkbox">
+                               <input type="checkbox" id="user-2" class="filled-in">
+                                <label for="user-2">Libur Kerja</label>
+                            </div>                      
+                        </div>
+                    </div> 
+                    </div>  
             </div>
         </div>
     </div>
 </div>
-
-
 
 <?php if(1+1==2){ ?>
 

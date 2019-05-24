@@ -32,13 +32,13 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(<?php echo base_url(); ?>assets/login/images/bg-01.jpg);">
+				<div class="login100-form-title" style="background-image: url(<?php echo base_url(); ?>assets/login/images/bg-01.png);">
 					<span class="login100-form-title-1">
 						Sign In
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" action="login/submit" method="POST">
+				<form class="login100-form validate-form" action="<?php echo base_url();?>/login/submit" method="POST">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Username</span>
 						<input class="input100" type="text" name="username" placeholder="Enter username">
