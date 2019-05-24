@@ -48,17 +48,21 @@ class Api extends CI_Controller {
 
 			if($hak->num_rows()>0){
 				$users = $this->db->select('
-					id,
-					nik,
-					nama_lengkap,
-					nama_singkat,
-					department,
-					department_sub
-				')->get_where('personalia_pegawai',array(
-					'is_delete'=>0,
-					'department_sub'=>$sub_dep,
-					'department'=>$dep
-				));	
+                	p.id,
+                	p.nik,
+                	p.nama_lengkap,
+                	p.nama_singkat,
+                	d.nama_department,
+                	s.nama_department_sub,
+                	p.fungsional
+                ')
+                ->where('p.is_delete',0)
+                ->where('p.department',$dep)
+                ->where('p.department_sub',$sub_dep)
+                ->from('personalia_pegawai p')
+                ->join('master_department d','p.department=d.id','left')
+                ->join('master_department_sub s','p.department_sub=s.id','left')
+                ->get();
 
 				if($users->num_rows()>0){
 					echo json_encode(array('status'=>1,'message'=>'User granted.','result'=>$users->result()));
