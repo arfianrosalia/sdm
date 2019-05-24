@@ -38,11 +38,7 @@
 					</span>
 				</div>
 
-<<<<<<< HEAD
-				<form class="login100-form validate-form" action="<?php echo base_url();?>/login/submit" method="POST">
-=======
-				<form class="login100-form validate-form" action="<?php echo base_url(); ?>/login/submit" method="POST">
->>>>>>> 1aca1a874333bc87d61394daf94609c2977af810
+				<form class="login100-form validate-form" action="<?php echo base_url(); ?>/login/submit" method="GET">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Username</span>
 						<input class="input100" type="text" name="username" placeholder="Enter username">

@@ -5,7 +5,7 @@
 
 	// $CI->db->select('id,username,password')->get_where('personalia_pegawai',array('username'=>$u,'password'=>md5(sha1($p))));
 	function u($u=null,$p=null,$t=null){
-		$user = $t->db->select('id,username,password')->get_where('personalia_pegawai',array('nik'=>$u,'password'=>md5(sha1($p))));
+		$user = $t->db->select('id,nik,password')->get_where('personalia_pegawai',array('nik'=>$u,'password'=>md5(sha1($p))));
 		if($user->num_rows()>0){
 			return $user->row();
 		}else{
@@ -27,6 +27,7 @@
 		$CI =& 	get_instance();
 		$CI->session->unset_userdata('username');
 		$CI->session->unset_userdata('password');
+		$CI->session->sess_destroy();
 	}
 
 	
@@ -56,19 +57,23 @@
 						}else{
 							unset_session();
 							redirect('login');
+							
 						}
 					}else{
 						// unset_session();
 						unset_session();
 						redirect('login');
+						
 					}
 				}else{
 					unset_session();
 					redirect('login');
+					
 				}
 			}else{
 				unset_session();
 				redirect('login');
+				
 			}
 		}
 	}

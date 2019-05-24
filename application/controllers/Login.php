@@ -25,7 +25,7 @@ class Login extends CI_Controller {
 
 	public function submit(){
 		// echo $this->uri->segment(1);
-
+		
 		$this->session->set_userdata('username',$this->input->post('username'));
 		$this->session->set_userdata('password',$this->input->post('password'));
 		redirect('pegawai');
