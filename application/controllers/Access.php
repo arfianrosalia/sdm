@@ -41,10 +41,7 @@ class Access extends CI_Controller {
 		$token = $this->input->post('token');
 		$inp = $this->input->post('data');
 		$txt = $this->input->post('input');
-
 		$data = $this->db->select('id')->get_where('personalia_pegawai',array('id_token'=>$token));
-		
-
 		if($data->num_rows()>0){
 			$h = $this->db->select('*')->get_where('hak_akses',array('id_pegawai'=>$data->row()->id));
 

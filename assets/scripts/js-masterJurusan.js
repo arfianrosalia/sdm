@@ -198,8 +198,7 @@ function edit(id,el){
                   content:function(){
                     var self = this;
                     return $.post(URL+'master/get_idjurusan/',{id:id}).done(function(data){
-                       
-                        self.setContent(data);
+                       self.setContent(data);
                     }).fail(function(e){
 
                     });

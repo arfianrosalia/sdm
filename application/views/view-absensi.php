@@ -1,41 +1,45 @@
-<div class="row clearfix" id="list_absensi">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-            <div class="body">
-                <div class="row clearfix">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="demo-checkbox">
-                                <input type="checkbox" id="user-1" class="filled-in">
-                                <label for="user-1">Agung Purnomo</label>
-                                <hr>
-                                <input type="checkbox" id="user-2" class="filled-in">
-                                <label for="user-2">Indriawan</label>
-                                <input type="checkbox" id="user-3" class="filled-in">
-                                <label for="user-3">Deny Hendra</label>
-                                <input type="checkbox" id="user-4" class="filled-in">
-                                <label for="user-4">Rudy P</label>
-                                <input type="checkbox" id="user-5" class="filled-in">
-                                <label for="user-5">Arif Mustaqim</label>
-                                <input type="checkbox" id="user-6" class="filled-in">
-                                <label for="user-6">Moch Arfian</label>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-
-<?php if(1+1==2){ ?>
 
 
 <div class="block-header">
 
-    <h2>LIST ABSENSI <?php echo $this->uri->segment(1); ?></h2>
+    <h2>LIST ABSENSI </h2>
 </div>
 
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+       <div class="card">
+            <div class="header">
+                <h2>
+                    LIST ABSENSI
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li>
+                        <button type="button" class="btn bg-blue waves-effect" onclick="v_absensi($(this))">
+                            <i class="material-icons">verified_user</i>
+                            <span>VERIFIKASI KEHADIRAN</span>
+                        </button>
+                    </li>
+                </ul>
+              
+            </div><h1>
+            <input type="text" name="tgl" class="form-control" value="<?php echo date('D, d F Y');?>" disabled></h1>
+             <div class="body"> 
+                <table class="table table-bordered table-responsive table-hover" id="tb_absensi">
+                    <thead>
+                        <tr>
+                            <th width="10px">No.</th>
+                            <th>Nama&nbsp;Karyawan</th>
+                            <th width="180px">Sub Department</th>
+                            <th width="20px">Action</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+    </div>
+    </div>
+</div>
 
 <div class="row clearfix" id="list_absensi">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -185,4 +189,3 @@
 
 </style>
 
-<?php } ?>

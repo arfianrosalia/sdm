@@ -27,16 +27,16 @@ class Absensi extends CI_Controller {
 	}
 
 	public function getBySubDepartment(){
-		$inp_user = $this->input->post('token');
-		$inp_nik = $this->input->post('nik');
-		$inp_pass = md5(sha1($this->input->post('password')));
+		$inp_user = $this->session->username;
+		$inp_pass = md5(sha1($this->session->password));
 
+		
 		$pengabsen = $this->db->select('
 			id,
 			nama_singkat,
 			department,
 			department_sub
-		')->get_where('personalia_pegawai',array('is_delete'=>0,'id_token'=>$inp_user,'nik'=>$inp_nik,'password'=>$inp_pass));
+		')->get_where('personalia_pegawai',array('is_delete'=>0,'nik'=>$inp_user,'password'=>$inp_pass));
 
 		if($pengabsen->num_rows()>0){
 			$id = $pengabsen->row()->id;
@@ -52,17 +52,22 @@ class Absensi extends CI_Controller {
 
 			if($hak->num_rows()>0){
 				$users = $this->db->select('
-					id,
-					nik,
-					nama_lengkap,
-					nama_singkat,
-					department,
-					department_sub
-				')->get_where('personalia_pegawai',array(
-					'is_delete'=>0,
-					'department_sub'=>$sub_dep,
-					'department'=>$dep
-				));	
+					p.id,
+                	p.nik,
+                	p.nama_lengkap,
+                	p.nama_singkat,
+                	d.nama_department,
+                	s.nama_department_sub,
+                	p.fungsional
+                ')
+                ->where('p.is_delete',0)
+                ->where('p.department',$dep)
+                ->where('p.department_sub',$sub_dep)
+                ->from('personalia_pegawai p')
+                ->join('master_department d','p.department=d.id','left')
+                ->join('master_department_sub s','p.department_sub=s.id','left')
+                ->get();
+				;	
 
 				if($users->num_rows()>0){
 					echo json_encode(array('status'=>1,'message'=>'User granted.','result'=>$users->result()));
@@ -75,4 +80,27 @@ class Absensi extends CI_Controller {
 			echo json_encode(array('status'=>0,'message'=>'User tidak ditemukan / NIK atau Password salah.','result'=>null));
 		}
 	}
+
+	public function verifikasi_absensi(){
+		$username = $this->session->username;
+		$password = md5(sha1($this->session->password));
+		$inp = $this->input->post('data');
+		$data = $this->db->select('id')->get_where('personalia_pegawai',array('nik'=>$username,'password'=>$password));
+		if($data->num_rows()>0){
+			foreach ($inp as $key => $value) {
+					 $cek = $this->db->get_where('penggajian_absensi',array('pegawai_id'=>$value['id'],'status_kehadiran'=>$value['status_kehadiran']));
+					 if ($cek->num_rows()>0){
+					 		$this->db->update('penggajian_absensi',array('pegawai_id'=>$value['id'], 'status_kehadiran'=>$value['status_kehadiran']));
+					 }else{
+					 		$this->db->insert('penggajian_absensi',array('pegawai_id'=>$value['id'], 'status_kehadiran'=>$value['status_kehadiran']));
+					 }
+				}
+		}
+	}
+
+	public function getList_Harian(){
+		
+	}
 }
+
+				
