@@ -15,7 +15,7 @@
 					';
 			$load = $this->db
 					->where('p.is_delete',0)
-					->where('p.status_karyawan in (12,3,1)')
+					->where('p.status_karyawan in (12,3,1,10)')
 					->select($val)
 					// ->select('p.nama_singkat,nama_fungsional,nama_department,p.no_telepon')
 					->from('personalia_pegawai as p')

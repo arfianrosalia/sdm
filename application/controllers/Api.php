@@ -26,6 +26,7 @@ class Api extends CI_Controller {
 		$inp_user = $this->input->post('token');
 		$inp_nik = $this->input->post('nik');
 		$inp_pass = md5(sha1($this->input->post('password')));
+		$inp_tanggal = $this->input->post('tanggal');
 
 		$pengabsen = $this->db->select('
 			id,
@@ -54,7 +55,9 @@ class Api extends CI_Controller {
                 	p.nama_singkat,
                 	d.nama_department,
                 	s.nama_department_sub,
-                	p.fungsional
+                	p.fungsional,
+                	pa.status_kehadiran,
+                	pa.id as id_absensi
                 ')
                 ->where('p.is_delete',0)
                 ->where('p.department',$dep)
@@ -62,17 +65,99 @@ class Api extends CI_Controller {
                 ->from('personalia_pegawai p')
                 ->join('master_department d','p.department=d.id','left')
                 ->join('master_department_sub s','p.department_sub=s.id','left')
+                ->join('penggajian_absensi pa','p.id=pa.pegawai_id and pa.tanggal="'.$inp_tanggal.'"','left')
+                ->order_by('p.nama_singkat','asc')
                 ->get();
 
 				if($users->num_rows()>0){
 					echo json_encode(array('status'=>1,'message'=>'User granted.','result'=>$users->result()));
-				}
+				}else{
+    				echo json_encode(array('status'=>0,'message'=>'Anda tidak mempunyai hak akses untuk Login dan Absensi.','result'=>null));
+    			}
 			}else{
 				echo json_encode(array('status'=>0,'message'=>'Anda tidak mempunyai akses Absensi.','result'=>null));
 			}
 
 		}else{
 			echo json_encode(array('status'=>0,'message'=>'User tidak ditemukan / NIK atau Password salah.','result'=>null));
+		}
+	}
+
+	public function loginMobile(){
+		$nik = $this->input->post('nik');
+		$password = md5(sha1($this->input->post('password')));
+
+		$data = $this->db
+				->select('
+					p.id,
+					p.id_token,
+					p.nik,
+					p.nama_singkat,
+					p.nama_lengkap,
+					d.nama_department,
+					s.nama_department_sub,
+					p.username,
+					p.password,
+					h.akses_login_mobile,
+					h.akses_absensi,
+					p.fungsional
+				')
+				->where('p.nik',$nik)
+				->where('p.password',$password)
+				->from('personalia_pegawai p')
+				->join('hak_akses h','p.id=h.id_pegawai')
+				->join('master_department d','p.department=d.id','left')
+                ->join('master_department_sub s','p.department_sub=s.id','left')
+				->get();
+
+		
+		if($data->num_rows()>0){
+			if($data->row()->akses_login_mobile==1 && $data->row()->akses_absensi==1){
+				echo json_encode(array('status'=>1,'message'=>'Akses Diterima.','result'=>$data->row()));	
+			}else{
+				echo json_encode(array('status'=>0,'message'=>'Anda tidak mempunyai hak akses untuk Login dan Absensi.','result'=>null));
+			}
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Anda tidak mempunyai hak akses.','result'=>null));
+		}
+	}
+
+	public function SubmitAbsensiTidakMasuk(){
+		$id_peg = $this->input->post('id_pegawai');
+		$status = $this->input->post('status_kehadiran');
+		$tanggal = $this->input->post('tanggal');
+
+		$countPeg = count($id_peg);
+
+		foreach ($id_peg as $key => $value) {
+			$pegawai = $this->db->select('*')->get_where('penggajian_absensi',array('pegawai_id'=>$value,'tanggal'=>$tanggal[$key]));
+			
+			$stsHadir;
+
+			if($status[$key]=='true'){
+				$stsHadir=0;
+			}else{
+				$stsHadir=1;
+			}
+
+			if($pegawai->num_rows()>0){
+				$insert = $this->db->where('pegawai_id',$value)->where('tanggal',$tanggal[$key])->update('penggajian_absensi',array('status_kehadiran'=>$stsHadir));
+				if($insert){
+					$countPeg--;
+				}
+
+			}else{
+				$update = $this->db->insert('penggajian_absensi',array('pegawai_id'=>$value,'tanggal'=>$tanggal[$key],'status_kehadiran'=>$stsHadir));
+				if($update){
+					$countPeg--;
+				}
+			}
+		}
+
+		if($countPeg==0){
+			echo json_encode(array('status'=>1,'message'=>'Sukses memperbarui data Absensi.','result'=>null));
+		}else{
+			echo json_encode(array('status'=>0,'message'=>'Gagal memperbarui beberapa data Absensi.','result'=>null));
 		}
 	}
 }

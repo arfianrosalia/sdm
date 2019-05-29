@@ -185,7 +185,7 @@ class Pegawai extends CI_Controller {
 
 			$fix->id_token = $token;
 
-			$this->his(1,$ck_dup);
+			$this->his('',1,$ck_dup);
 
 			
 			$insert = $this->db->insert('personalia_pegawai',$fix);
@@ -269,7 +269,10 @@ class Pegawai extends CI_Controller {
 
 			}
 
-			$insert_his = $this->db->insert_batch('history_pegawai',$f_his);
+
+			if(!empty($f_his)){
+				$insert_his = $this->db->insert_batch('history_pegawai',$f_his);
+			}
 		}
 		// END OF HIS
 	}
