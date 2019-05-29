@@ -23,7 +23,7 @@
                 </ul>
               
             </div><h1>
-            <input type="text" name="tgl" class="form-control" value="<?php echo date('D, d F Y');?>" disabled></h1>
+            <input type="text" name="tgl" class="form-control" value="<?php echo date('D, d F Y');?>"></h1>
              <div class="body"> 
                 <table class="table table-bordered table-responsive table-hover" id="tb_absensi">
                     <thead>
