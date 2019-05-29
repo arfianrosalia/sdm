@@ -34,7 +34,6 @@
                     <tbody>
                          <?php if(!empty($ls_department)){ $no=1; ?>
                             <?php foreach ($ls_department as $key => $value) { ?>
-              
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $value->nama_department_sub;?></td>

@@ -8,7 +8,7 @@
 		}
 		public function add_agama(){
 			$data = array(
-				'nama_agama' => $this->input->post('nama') 
+				'nama_agama' => $this->input->post('nama'), 
 				 );
 			$result = $this->db->insert('master_agama',$data);
 			return $result;

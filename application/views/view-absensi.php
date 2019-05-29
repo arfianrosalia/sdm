@@ -1,55 +1,45 @@
 
-<div class="row clearfix">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-            <div class="header">
-                <div class="row clearfix">
-                    <div class="col-xs-12 col-sm-6">
-                        <h2>LIST Agama</h2>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 align-right">
-                        <div class="waves-effect"><i class="material-icons">refresh</i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="body">
-             <div class="row clearfix">
-             <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <b><input type="text" class="form-control" value="Agung P" placeholder="col-md-4" readonly="readonly"></b>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="form-line" align="center">
-                                <b><input type="text" class="form-control" value="Programmer" placeholder="col-md-4" readonly="readonly"></b>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="demo-checkbox">
-                               <input type="checkbox" id="user-2" class="filled-in">
-                                <label for="user-2">Libur Kerja</label>
-                            </div>                      
-                        </div>
-                    </div> 
-                    </div>  
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php if(1+1==2){ ?>
 
 
 <div class="block-header">
 
-    <h2>LIST ABSENSI <?php echo $this->uri->segment(1); ?></h2>
+    <h2>LIST ABSENSI </h2>
 </div>
 
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+       <div class="card">
+            <div class="header">
+                <h2>
+                    LIST ABSENSI
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li>
+                        <button type="button" class="btn bg-blue waves-effect" onclick="v_absensi($(this))">
+                            <i class="material-icons">verified_user</i>
+                            <span>VERIFIKASI KEHADIRAN</span>
+                        </button>
+                    </li>
+                </ul>
+              
+            </div><h1>
+            <input type="text" name="tgl" class="form-control" value="<?php echo date('D, d F Y');?>" disabled></h1>
+             <div class="body"> 
+                <table class="table table-bordered table-responsive table-hover" id="tb_absensi">
+                    <thead>
+                        <tr>
+                            <th width="10px">No.</th>
+                            <th>Nama&nbsp;Karyawan</th>
+                            <th width="180px">Sub Department</th>
+                            <th width="20px">Action</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+    </div>
+    </div>
+</div>
 
 <div class="row clearfix" id="list_absensi">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -199,4 +189,3 @@
 
 </style>
 
-<?php } ?>
